@@ -80,6 +80,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SitterRegistrationPage.xaml.cs">
+      <DependentUpon>SitterRegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BasicPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GoToRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,10 +107,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AuthorizationPage.xaml.cs">
+      <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BasicPage.xaml.cs">
+      <DependentUpon>BasicPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientRegistrationPage.xaml.cs">
+      <DependentUpon>ClientRegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GoToRegistrationPage.xaml.cs">
+      <DependentUpon>GoToRegistrationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SitterRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -125,6 +160,15 @@
       <Project>{59720d61-2dde-4411-845d-2e0553f1f4f1}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

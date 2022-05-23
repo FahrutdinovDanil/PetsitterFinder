@@ -12,23 +12,27 @@ namespace Core
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
+        public User()
         {
-            this.Applications = new HashSet<Applications>();
+            this.Administrator = new HashSet<Administrator>();
+            this.Client = new HashSet<Client>();
+            this.Petsitter = new HashSet<Petsitter>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Phone { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public byte[] Photo { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public Nullable<int> RoleId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Applications> Applications { get; set; }
-        public virtual User User { get; set; }
+        public virtual ICollection<Administrator> Administrator { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Client> Client { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Petsitter> Petsitter { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

@@ -15,11 +15,11 @@ namespace Core
     public partial class Applications
     {
         public int Id { get; set; }
-        public Nullable<int> IdClient { get; set; }
-        public Nullable<int> IdPetssiter { get; set; }
-        public Nullable<int> IdPet { get; set; }
         public Nullable<bool> Status { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> ClientId { get; set; }
+        public Nullable<int> PetssiterId { get; set; }
+        public Nullable<int> PetId { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Pet Pet { get; set; }

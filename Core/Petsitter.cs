@@ -24,15 +24,16 @@ namespace Core
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Address { get; set; }
-        public Nullable<int> Phone { get; set; }
-        public string Photo { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> IdPet { get; set; }
+        public string Phone { get; set; }
+        public byte[] Photo { get; set; }
         public Nullable<bool> Confirmed { get; set; }
+        public Nullable<int> PetId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applications> Applications { get; set; }
         public virtual Pet Pet { get; set; }
+        public virtual User User { get; set; }
     }
 }

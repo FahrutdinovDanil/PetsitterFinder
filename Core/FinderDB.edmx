@@ -4,24 +4,23 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище PetsitterFinderModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище PetsitterFinderModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Administrator">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="FIO" Type="varchar" MaxLength="50" />
-          <Property Name="Login" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="IdClient" Type="int" />
-          <Property Name="IdPetssiter" Type="int" />
-          <Property Name="IdPet" Type="int" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="PetssiterId" Type="int" />
+          <Property Name="PetId" Type="int" />
           <Property Name="Status" Type="bit" />
           <Property Name="Date" Type="date" />
         </EntityType>
@@ -29,12 +28,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Surname" Type="varchar" MaxLength="50" />
-          <Property Name="Login" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
-          <Property Name="Phone" Type="int" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Pet">
           <Key>
@@ -54,16 +53,23 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Surname" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
-          <Property Name="Phone" Type="int" />
-          <Property Name="Photo" Type="varchar" MaxLength="50" />
-          <Property Name="Login" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
-          <Property Name="IdPet" Type="int" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="PetId" Type="int" />
           <Property Name="Confirmed" Type="bit" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="BirthDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -75,6 +81,27 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Administrator_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Applications_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
@@ -83,7 +110,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Applications">
-              <PropertyRef Name="IdClient" />
+              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -95,7 +122,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Applications">
-              <PropertyRef Name="IdPet" />
+              <PropertyRef Name="PetId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -107,7 +134,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Applications">
-              <PropertyRef Name="IdPetssiter" />
+              <PropertyRef Name="PetssiterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -119,7 +158,31 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Petsitter">
-              <PropertyRef Name="IdPet" />
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Petsitter_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Petsitter" Type="Self.Petsitter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Petsitter">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -129,7 +192,13 @@
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pet" EntityType="Self.Pet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Petsitter" EntityType="Self.Petsitter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Administrator_User" Association="Self.FK_Administrator_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Administrator" EntitySet="Administrator" />
+          </AssociationSet>
           <AssociationSet Name="FK_Applications_Client" Association="Self.FK_Applications_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Applications" EntitySet="Applications" />
@@ -142,13 +211,24 @@
             <End Role="Petsitter" EntitySet="Petsitter" />
             <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
+          <AssociationSet Name="FK_Client_User" Association="Self.FK_Client_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
           <AssociationSet Name="FK_Petsitter_Pet" Association="Self.FK_Petsitter_Pet">
             <End Role="Pet" EntitySet="Pet" />
             <End Role="Petsitter" EntitySet="Petsitter" />
           </AssociationSet>
+          <AssociationSet Name="FK_Petsitter_User" Association="Self.FK_Petsitter_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Petsitter" EntitySet="Petsitter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PetsitterFinderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -158,22 +238,22 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Administrator_User" FromRole="Administrator" ToRole="User" />
         </EntityType>
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdClient" Type="Int32" />
-          <Property Name="IdPetssiter" Type="Int32" />
-          <Property Name="IdPet" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="Date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Applications_Client" FromRole="Applications" ToRole="Client" />
-          <NavigationProperty Name="Pet" Relationship="Self.FK_Applications_Pet" FromRole="Applications" ToRole="Pet" />
-          <NavigationProperty Name="Petsitter" Relationship="Self.FK_Applications_Petsitter" FromRole="Applications" ToRole="Petsitter" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="PetssiterId" Type="Int32" />
+          <Property Name="PetId" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="PetsitterFinderModel.FK_Applications_Client" FromRole="Applications" ToRole="Client" />
+          <NavigationProperty Name="Pet" Relationship="PetsitterFinderModel.FK_Applications_Pet" FromRole="Applications" ToRole="Pet" />
+          <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Applications_Petsitter" FromRole="Applications" ToRole="Petsitter" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -182,10 +262,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="Int32" />
-          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Client" FromRole="Client" ToRole="Applications" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Applications" Relationship="PetsitterFinderModel.FK_Applications_Client" FromRole="Client" ToRole="Applications" />
+          <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Client_User" FromRole="Client" ToRole="User" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Pet">
           <Key>
@@ -200,8 +281,8 @@
           <Property Name="Size" Type="Int32" />
           <Property Name="Discription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Pet" FromRole="Pet" ToRole="Applications" />
-          <NavigationProperty Name="Petsitter" Relationship="Self.FK_Petsitter_Pet" FromRole="Pet" ToRole="Petsitter" />
+          <NavigationProperty Name="Applications" Relationship="PetsitterFinderModel.FK_Applications_Pet" FromRole="Pet" ToRole="Applications" />
+          <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Petsitter_Pet" FromRole="Pet" ToRole="Petsitter" />
         </EntityType>
         <EntityType Name="Petsitter">
           <Key>
@@ -211,14 +292,15 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="Int32" />
-          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdPet" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Confirmed" Type="Boolean" />
-          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Petsitter" FromRole="Petsitter" ToRole="Applications" />
-          <NavigationProperty Name="Pet" Relationship="Self.FK_Petsitter_Pet" FromRole="Petsitter" ToRole="Pet" />
+          <Property Name="PetId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Applications" Relationship="PetsitterFinderModel.FK_Applications_Petsitter" FromRole="Petsitter" ToRole="Applications" />
+          <NavigationProperty Name="Pet" Relationship="PetsitterFinderModel.FK_Petsitter_Pet" FromRole="Petsitter" ToRole="Pet" />
+          <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Petsitter_User" FromRole="Petsitter" ToRole="User" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -230,54 +312,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Applications_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
-          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Applications">
-              <PropertyRef Name="IdClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Applications_Pet">
-          <End Role="Pet" Type="Self.Pet" Multiplicity="0..1" />
-          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Applications">
-              <PropertyRef Name="IdPet" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Applications_Petsitter">
-          <End Role="Petsitter" Type="Self.Petsitter" Multiplicity="0..1" />
-          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Petsitter">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Applications">
-              <PropertyRef Name="IdPetssiter" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Petsitter_Pet">
-          <End Role="Pet" Type="Self.Pet" Multiplicity="0..1" />
-          <End Role="Petsitter" Type="Self.Petsitter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Petsitter">
-              <PropertyRef Name="IdPet" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="PetsitterFinderEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Administrator" EntityType="Self.Administrator" />
           <EntitySet Name="Applications" EntityType="Self.Applications" />
@@ -285,23 +319,158 @@
           <EntitySet Name="Pet" EntityType="Self.Pet" />
           <EntitySet Name="Petsitter" EntityType="Self.Petsitter" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_Applications_Client" Association="Self.FK_Applications_Client">
+          <EntitySet Name="User" EntityType="PetsitterFinderModel.User" />
+          <AssociationSet Name="FK_Administrator_User" Association="PetsitterFinderModel.FK_Administrator_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Administrator" EntitySet="Administrator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Client" Association="PetsitterFinderModel.FK_Applications_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
-          <AssociationSet Name="FK_Applications_Pet" Association="Self.FK_Applications_Pet">
+          <AssociationSet Name="FK_Applications_Pet" Association="PetsitterFinderModel.FK_Applications_Pet">
             <End Role="Pet" EntitySet="Pet" />
             <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
-          <AssociationSet Name="FK_Applications_Petsitter" Association="Self.FK_Applications_Petsitter">
+          <AssociationSet Name="FK_Applications_Petsitter" Association="PetsitterFinderModel.FK_Applications_Petsitter">
             <End Role="Petsitter" EntitySet="Petsitter" />
             <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
-          <AssociationSet Name="FK_Petsitter_Pet" Association="Self.FK_Petsitter_Pet">
+          <AssociationSet Name="FK_Client_User" Association="PetsitterFinderModel.FK_Client_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Petsitter_Pet" Association="PetsitterFinderModel.FK_Petsitter_Pet">
             <End Role="Pet" EntitySet="Pet" />
             <End Role="Petsitter" EntitySet="Petsitter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Petsitter_User" Association="PetsitterFinderModel.FK_Petsitter_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Petsitter" EntitySet="Petsitter" />
+          </AssociationSet>
+          <EntitySet Name="Role" EntityType="PetsitterFinderModel.Role" />
+          <AssociationSet Name="FK_User_Role" Association="PetsitterFinderModel.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Administrator" Relationship="PetsitterFinderModel.FK_Administrator_User" FromRole="User" ToRole="Administrator" />
+          <NavigationProperty Name="Client" Relationship="PetsitterFinderModel.FK_Client_User" FromRole="User" ToRole="Client" />
+          <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Petsitter_User" FromRole="User" ToRole="Petsitter" />
+          <NavigationProperty Name="Role" Relationship="PetsitterFinderModel.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Administrator_User">
+          <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Administrator" Role="Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Client">
+          <End Type="PetsitterFinderModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Applications" Role="Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Pet">
+          <End Type="PetsitterFinderModel.Pet" Role="Pet" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Applications" Role="Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Petsitter">
+          <End Type="PetsitterFinderModel.Petsitter" Role="Petsitter" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Applications" Role="Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Petsitter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="PetssiterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_User">
+          <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Petsitter_Pet">
+          <End Type="PetsitterFinderModel.Pet" Role="Pet" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Petsitter" Role="Petsitter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Petsitter">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Petsitter_User">
+          <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Petsitter" Role="Petsitter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Petsitter">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_User_Role">
+          <End Type="PetsitterFinderModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -311,20 +480,19 @@
           <EntitySetMapping Name="Administrator">
             <EntityTypeMapping TypeName="PetsitterFinderModel.Administrator">
               <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FIO" ColumnName="FIO" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="PetsitterFinderModel.Applications">
               <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="PetssiterId" ColumnName="PetssiterId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
-                <ScalarProperty Name="IdPetssiter" ColumnName="IdPetssiter" />
-                <ScalarProperty Name="IdPet" ColumnName="IdPet" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
@@ -333,11 +501,11 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="PetsitterFinderModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -360,15 +528,15 @@
           <EntitySetMapping Name="Petsitter">
             <EntityTypeMapping TypeName="PetsitterFinderModel.Petsitter">
               <MappingFragment StoreEntitySet="Petsitter">
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IdPet" ColumnName="IdPet" />
                 <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -381,6 +549,24 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="PetsitterFinderModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="PetsitterFinderModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

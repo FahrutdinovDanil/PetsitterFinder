@@ -16,33 +16,28 @@ using System.Windows.Shapes;
 namespace PetsitterFinder
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для GoToRegistrationPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GoToRegistrationPage : Page
     {
-        public MainWindow()
+        public GoToRegistrationPage()
         {
             InitializeComponent();
-            frame_auto_reg.Navigate(new AuthorizationPage());
         }
 
-        private void lb_Main_Click(object sender, MouseButtonEventArgs e)
+        private void btn_RegClient_Click(object sender, RoutedEventArgs e)
         {
-            //frame_auto_reg.Navigate(new BasicPage());
+            NavigationService.Navigate(new ClientRegistrationPage());
         }
 
-        private void btn_MyCabinet_Click(object sender, RoutedEventArgs e)
+        private void btn_RegSitter_Click(object sender, RoutedEventArgs e)
         {
-            //frame_auto_reg.Navigate(new MyCabinetPage());
+            NavigationService.Navigate(new SitterRegistrationPage());
         }
 
-        private void lb_Sitters_Click(object sender, MouseButtonEventArgs e)
-        {
-            //frame_auto_reg.Navigate(new SittersPage());
-        }
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            frame_auto_reg.GoBack();
+            NavigationService.GoBack();
         }
     }
 }
