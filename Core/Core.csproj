@@ -96,6 +96,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FinderDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Owner.cs">
+      <DependentUpon>FinderDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Pet.cs">
       <DependentUpon>FinderDB.tt</DependentUpon>
     </Compile>

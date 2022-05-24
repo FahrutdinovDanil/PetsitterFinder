@@ -20,6 +20,7 @@ namespace Core
             this.Administrator = new HashSet<Administrator>();
             this.Client = new HashSet<Client>();
             this.Petsitter = new HashSet<Petsitter>();
+            this.Owner = new HashSet<Owner>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Petsitter> Petsitter { get; set; }
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Owner> Owner { get; set; }
     }
 }

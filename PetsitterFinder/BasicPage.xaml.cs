@@ -21,9 +21,30 @@ namespace PetsitterFinder
     /// </summary>
     public partial class BasicPage : Page
     {
+        public static User currentUser;
         public BasicPage(User user)
         {
+            currentUser = user;
             InitializeComponent();
+        }
+
+        private void lb_Main_Click(object sender, MouseButtonEventArgs e)
+        {
+            //NavigationService.Navigate(new BasicPage());
+        }
+        private void lb_MyPets_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new MyPetsPage(currentUser));
+        }
+
+        private void btn_MyCabinet_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MyCabinetPage());
+        }
+
+        private void lb_Sitters_Click(object sender, MouseButtonEventArgs e)
+        {
+            //frame_auto_reg.Navigate(new SittersPage());
         }
     }
 }

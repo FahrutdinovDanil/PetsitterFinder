@@ -80,9 +80,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPetPage.xaml.cs">
+      <DependentUpon>AddPetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyCabinetPage.xaml.cs">
+      <DependentUpon>MyCabinetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyPetsPage.xaml.cs">
+      <DependentUpon>MyPetsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SitterRegistrationPage.xaml.cs">
       <DependentUpon>SitterRegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddPetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AuthorizationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +136,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MyCabinetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyPetsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SitterRegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

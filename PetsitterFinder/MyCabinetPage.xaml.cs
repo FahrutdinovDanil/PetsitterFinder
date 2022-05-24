@@ -1,5 +1,4 @@
-﻿using Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +16,13 @@ using System.Windows.Shapes;
 namespace PetsitterFinder
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для MyCabinetPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MyCabinetPage : Page
     {
-        public MainWindow()
+        public MyCabinetPage()
         {
             InitializeComponent();
-            frame_auto_reg.Navigate(new AuthorizationPage());
-        }
-
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            frame_auto_reg.GoBack();
         }
     }
 }

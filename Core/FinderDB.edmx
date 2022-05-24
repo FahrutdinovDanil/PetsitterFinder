@@ -35,19 +35,28 @@
           <Property Name="UserId" Type="int" />
           <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="PetId" Type="int" />
+        </EntityType>
         <EntityType Name="Pet">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Вreed" Type="varchar" MaxLength="50" />
-          <Property Name="Photo" Type="varchar" MaxLength="50" />
+          <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="Year" Type="int" />
           <Property Name="Month" Type="int" />
           <Property Name="Size" Type="int" />
           <Property Name="Discription" Type="varchar" MaxLength="100" />
           <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Petsitter">
           <Key>
@@ -59,7 +68,6 @@
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Photo" Type="varbinary(max)" />
-          <Property Name="PetId" Type="int" />
           <Property Name="Confirmed" Type="bit" />
           <Property Name="UserId" Type="int" />
           <Property Name="BirthDate" Type="date" />
@@ -150,15 +158,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Petsitter_Pet">
+        <Association Name="FK_Owner_Pet">
           <End Role="Pet" Type="Self.Pet" Multiplicity="0..1" />
-          <End Role="Petsitter" Type="Self.Petsitter" Multiplicity="*" />
+          <End Role="Owner" Type="Self.Owner" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pet">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Petsitter">
+            <Dependent Role="Owner">
               <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owner_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Owner" Type="Self.Owner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Owner">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -190,6 +210,7 @@
           <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pet" EntityType="Self.Pet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Petsitter" EntityType="Self.Petsitter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -215,9 +236,13 @@
             <End Role="User" EntitySet="User" />
             <End Role="Client" EntitySet="Client" />
           </AssociationSet>
-          <AssociationSet Name="FK_Petsitter_Pet" Association="Self.FK_Petsitter_Pet">
+          <AssociationSet Name="FK_Owner_Pet" Association="Self.FK_Owner_Pet">
             <End Role="Pet" EntitySet="Pet" />
-            <End Role="Petsitter" EntitySet="Petsitter" />
+            <End Role="Owner" EntitySet="Owner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owner_User" Association="Self.FK_Owner_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Owner" EntitySet="Owner" />
           </AssociationSet>
           <AssociationSet Name="FK_Petsitter_User" Association="Self.FK_Petsitter_User">
             <End Role="User" EntitySet="User" />
@@ -275,14 +300,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Вreed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Year" Type="Int32" />
           <Property Name="Month" Type="Int32" />
           <Property Name="Size" Type="Int32" />
           <Property Name="Discription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Applications" Relationship="PetsitterFinderModel.FK_Applications_Pet" FromRole="Pet" ToRole="Applications" />
-          <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Petsitter_Pet" FromRole="Pet" ToRole="Petsitter" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Owner" Relationship="PetsitterFinderModel.FK_Owner_Pet" FromRole="Pet" ToRole="Owner" />
         </EntityType>
         <EntityType Name="Petsitter">
           <Key>
@@ -295,10 +321,8 @@
           <Property Name="Phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Confirmed" Type="Boolean" />
-          <Property Name="PetId" Type="Int32" />
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="Applications" Relationship="PetsitterFinderModel.FK_Applications_Petsitter" FromRole="Petsitter" ToRole="Applications" />
-          <NavigationProperty Name="Pet" Relationship="PetsitterFinderModel.FK_Petsitter_Pet" FromRole="Petsitter" ToRole="Pet" />
           <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Petsitter_User" FromRole="Petsitter" ToRole="User" />
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
         </EntityType>
@@ -340,10 +364,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="Client" EntitySet="Client" />
           </AssociationSet>
-          <AssociationSet Name="FK_Petsitter_Pet" Association="PetsitterFinderModel.FK_Petsitter_Pet">
-            <End Role="Pet" EntitySet="Pet" />
-            <End Role="Petsitter" EntitySet="Petsitter" />
-          </AssociationSet>
           <AssociationSet Name="FK_Petsitter_User" Association="PetsitterFinderModel.FK_Petsitter_User">
             <End Role="User" EntitySet="User" />
             <End Role="Petsitter" EntitySet="Petsitter" />
@@ -352,6 +372,15 @@
           <AssociationSet Name="FK_User_Role" Association="PetsitterFinderModel.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <EntitySet Name="Owner" EntityType="PetsitterFinderModel.Owner" />
+          <AssociationSet Name="FK_Owner_Pet" Association="PetsitterFinderModel.FK_Owner_Pet">
+            <End Role="Pet" EntitySet="Pet" />
+            <End Role="Owner" EntitySet="Owner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owner_User" Association="PetsitterFinderModel.FK_Owner_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Owner" EntitySet="Owner" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
@@ -366,6 +395,7 @@
           <NavigationProperty Name="Client" Relationship="PetsitterFinderModel.FK_Client_User" FromRole="User" ToRole="Client" />
           <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Petsitter_User" FromRole="User" ToRole="Petsitter" />
           <NavigationProperty Name="Role" Relationship="PetsitterFinderModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Owner" Relationship="PetsitterFinderModel.FK_Owner_User" FromRole="User" ToRole="Owner" />
         </EntityType>
         <Association Name="FK_Administrator_User">
           <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="0..1" />
@@ -427,18 +457,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Petsitter_Pet">
-          <End Type="PetsitterFinderModel.Pet" Role="Pet" Multiplicity="0..1" />
-          <End Type="PetsitterFinderModel.Petsitter" Role="Petsitter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Petsitter">
-              <PropertyRef Name="PetId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Petsitter_User">
           <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="0..1" />
           <End Type="PetsitterFinderModel.Petsitter" Role="Petsitter" Multiplicity="*" />
@@ -468,6 +486,40 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="PetId" Type="Int32" />
+          <NavigationProperty Name="Pet" Relationship="PetsitterFinderModel.FK_Owner_Pet" FromRole="Owner" ToRole="Pet" />
+          <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Owner_User" FromRole="Owner" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Owner_Pet">
+          <End Type="PetsitterFinderModel.Pet" Role="Pet" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Owner" Role="Owner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Owner">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owner_User">
+          <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.Owner" Role="Owner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Owner">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -513,6 +565,7 @@
           <EntitySetMapping Name="Pet">
             <EntityTypeMapping TypeName="PetsitterFinderModel.Pet">
               <MappingFragment StoreEntitySet="Pet">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Вreed" ColumnName="Вreed" />
@@ -530,7 +583,6 @@
               <MappingFragment StoreEntitySet="Petsitter">
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="PetId" ColumnName="PetId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -566,6 +618,15 @@
             <EntityTypeMapping TypeName="PetsitterFinderModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owner">
+            <EntityTypeMapping TypeName="PetsitterFinderModel.Owner">
+              <MappingFragment StoreEntitySet="Owner">
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

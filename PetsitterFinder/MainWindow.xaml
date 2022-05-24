@@ -7,23 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="#ABD8EE">
     <Grid>
-        <Grid VerticalAlignment="Top" Background="#F1E4CA">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="logo.png" VerticalAlignment="Center" Width="50" Height="50"/>
-            <Label Grid.Column="1" Content="Главная" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Main_Click"/>
-            <Label Grid.Column="2" Content="Ситтеры" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Sitters_Click"/>
-            <Label Grid.Column="3" Content="Питомцы" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589"/>
-            <Label Grid.Column="4" Content="Другое" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589"/>
-            <Button Grid.Column="5" Grid.ColumnSpan="2" Content="Мой кабинет"  VerticalAlignment="Center" Height="32" Width="150" FontSize="18" Background="#005589" Foreground="#F1E4CA" Click="btn_MyCabinet_Click"/>
-        </Grid>
         <Grid Height="30" VerticalAlignment="Top" Margin="0 50 0 0">
             <Image Source="back.png" Width="30" HorizontalAlignment="Left" Height="30" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
         </Grid>

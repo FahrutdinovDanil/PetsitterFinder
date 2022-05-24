@@ -18,22 +18,23 @@ namespace Core
         public Pet()
         {
             this.Applications = new HashSet<Applications>();
-            this.Petsitter = new HashSet<Petsitter>();
+            this.Owner = new HashSet<Owner>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Вreed { get; set; }
-        public string Photo { get; set; }
+        public byte[] Photo { get; set; }
         public Nullable<int> Year { get; set; }
         public Nullable<int> Month { get; set; }
         public Nullable<int> Size { get; set; }
         public string Discription { get; set; }
         public string Gender { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applications> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Petsitter> Petsitter { get; set; }
+        public virtual ICollection<Owner> Owner { get; set; }
     }
 }

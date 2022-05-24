@@ -70,17 +70,17 @@ namespace PetsitterFinder
                     Registration.AddPetsitter(petsitterToAdd);
                     NavigationService.Navigate(new AuthorizationPage());
 
-                    System.Windows.MessageBox.Show("Аккаунт успешно создан!");
+                    MessageBox.Show("Аккаунт успешно создан!");
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("Заполните все поля!");
+                    MessageBox.Show("Заполните все поля!");
                 }
             }
             else
             {
                 tbLogin.Text = "";
-                System.Windows.MessageBox.Show("Придумайте другой логин");
+                MessageBox.Show("Придумайте другой логин");
             }
         }
     }

@@ -1,0 +1,89 @@
+﻿<Page x:Class="PetsitterFinder.AddPetPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PetsitterFinder"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddPetPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Добавление питомца" FontSize="24" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Имя питомца" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+        <TextBlock Text="Тип питомца" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+        <TextBlock Text="Порода" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+        <TextBlock Text="Пол" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+        <TextBlock Text="Размер" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+        <TextBlock Text="Возраст:" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+        <TextBlock Text="лет" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+        <TextBlock Text="месяцев" Grid.Column="3" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#005589" FontSize="18"/>
+
+        <TextBox x:Name="tbPetName" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="18" BorderBrush="#005589" Background="#ABD8EE" Foreground="#005589" Height="40" Width="180">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="tbPetBreed" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="18" BorderBrush="#005589" Background="#ABD8EE" Foreground="#005589" Height="40" Width="180">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="tbPetYear" Grid.Column="2" Grid.Row="6" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="18" BorderBrush="#005589" Background="#ABD8EE" Foreground="#005589" Height="40" Width="70">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="tbPetMonth" Grid.Column="2" Grid.Row="7" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="18" BorderBrush="#005589" Background="#ABD8EE" Foreground="#005589" Height="40" Width="70">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <ComboBox x:Name="cbPetType" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="18" BorderBrush="#005589" Background="#ABD8EE" Foreground="#005589" Height="40" Width="180"/>
+        <ComboBox x:Name="cbPetGender" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="18" BorderBrush="#005589" Background="#ABD8EE" Foreground="#005589" Height="40" Width="180"/>
+        <ComboBox x:Name="cbPetSize" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="18" BorderBrush="#005589" Background="#ABD8EE" Foreground="#005589" Height="40" Width="180"/>
+        <Image x:Name="imgPet" Grid.Column="4" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" Height="200" Width="300"></Image>
+        <Button x:Name="btnAddPetPhoto" Content="Добавить фото" FontSize="18" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="3" HorizontalAlignment="Center" Height="40" Width="180" BorderBrush="#F1E4CA" Margin="0 0 0 0" Background="#005589" Foreground="#F1E4CA" Click="btn_AddPetPhoto_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="18"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnNextAddInformation" Content="Следующая страница" FontSize="18" Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="3" HorizontalAlignment="Center" Height="40" Width="180" BorderBrush="#F1E4CA" Margin="0 0 0 0" Background="#005589" Foreground="#F1E4CA" Click="btn_NextPage_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="18"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Page>
