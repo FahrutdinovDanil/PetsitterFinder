@@ -36,7 +36,7 @@ namespace PetsitterFinder
         private void lvPetsitters_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedSitter = lvPetsitters.SelectedItem as Petsitter;
-            NavigationService.Navigate(new PetsitterPage(selectedSitter));
+            NavigationService.Navigate(new PetsitterPage(selectedSitter, currentUser));
         }
     }
 }

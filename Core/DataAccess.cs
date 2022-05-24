@@ -62,6 +62,34 @@ namespace Core
             }
         }
 
+        public static bool AddRequest(Request request)
+        {
+            try
+            {
+                Connection.connection.Request.Add(request);
+                Connection.connection.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool AddRequestPet(RequestPet requestPet)
+        {
+            try
+            {
+                Connection.connection.RequestPet.Add(requestPet);
+                Connection.connection.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static bool AddOwner(Owner owner)
         {
             try

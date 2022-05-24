@@ -26,13 +26,14 @@ namespace Core
         }
     
         public virtual DbSet<Administrator> Administrator { get; set; }
-        public virtual DbSet<Applications> Applications { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Owner> Owner { get; set; }
         public virtual DbSet<Pet> Pet { get; set; }
         public virtual DbSet<Petsitter> Petsitter { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<Owner> Owner { get; set; }
+        public virtual DbSet<RequestPet> RequestPet { get; set; }
     }
 }

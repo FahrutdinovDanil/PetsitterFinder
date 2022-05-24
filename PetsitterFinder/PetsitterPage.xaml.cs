@@ -22,12 +22,18 @@ namespace PetsitterFinder
     public partial class PetsitterPage : Page
     {
         private static Petsitter selectedPetsitter;
-        public PetsitterPage(Petsitter petsitter)
+        private static User currentUser;
+        public PetsitterPage(Petsitter petsitter, User user)
         {
             InitializeComponent();
+            currentUser = user;
             selectedPetsitter = petsitter;
             tbName.Text = petsitter.Name;
-            
+        }
+
+        private void btn_Send_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RequestPage(selectedPetsitter, currentUser));
         }
     }
 }
