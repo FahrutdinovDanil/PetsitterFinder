@@ -89,8 +89,14 @@
     <Compile Include="MyPetsPage.xaml.cs">
       <DependentUpon>MyPetsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PetsitterPage.xaml.cs">
+      <DependentUpon>PetsitterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SitterRegistrationPage.xaml.cs">
       <DependentUpon>SitterRegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SittersPage.xaml.cs">
+      <DependentUpon>SittersPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AddPetPage.xaml">
       <SubType>Designer</SubType>
@@ -144,7 +150,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PetsitterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SitterRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SittersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

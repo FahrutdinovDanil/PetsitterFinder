@@ -23,7 +23,7 @@
             <Label Grid.Column="1" Content="Главная" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Main_Click"/>
             <Label Grid.Column="2" Content="Ситтеры" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Sitters_Click"/>
             <Label Grid.Column="3" Content="Питомцы" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyPets_Click"/>
-            <Label Grid.Column="4" Content="" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589"/>
+            <Label Grid.Column="4" Content="Другое" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589"/>
             <Button Grid.Column="5" Grid.ColumnSpan="2" Content="Мой кабинет"  VerticalAlignment="Center" Height="32" Width="150" FontSize="18" Background="#005589" Foreground="#F1E4CA" Click="btn_MyCabinet_Click"/>
         </Grid>
     </Grid>

@@ -35,6 +35,11 @@ namespace Core
             ObservableCollection<Pet> pets = new ObservableCollection<Pet>(Connection.connection.Pet.Where(p => p.IsDeleted == false || p.IsDeleted == null));
             return pets;
         }
+        public static ObservableCollection<Petsitter> GetPetsitters()
+        {
+            ObservableCollection<Petsitter> petsitters = new ObservableCollection<Petsitter>(Connection.connection.Petsitter);
+            return petsitters;
+        }
 
         public static List<Pet> GetPets(int Id)
         {

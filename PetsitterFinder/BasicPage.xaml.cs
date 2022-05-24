@@ -44,7 +44,7 @@ namespace PetsitterFinder
 
         private void lb_Sitters_Click(object sender, MouseButtonEventArgs e)
         {
-            //frame_auto_reg.Navigate(new SittersPage());
+            NavigationService.Navigate(new SittersPage(currentUser));
         }
     }
 }
