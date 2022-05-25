@@ -68,7 +68,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientId" Type="int" />
           <Property Name="PetssiterId" Type="int" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="Date" Type="date" />
         </EntityType>
         <EntityType Name="RequestPet">
@@ -405,7 +405,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="ClientId" Type="Int32" />
           <Property Name="PetssiterId" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
+          <Property Name="Status" Type="String" />
           <Property Name="Date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Client" Relationship="PetsitterFinderModel.FK_Applications_Client" FromRole="Request" ToRole="Client" />
           <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Applications_Petsitter" FromRole="Request" ToRole="Petsitter" />

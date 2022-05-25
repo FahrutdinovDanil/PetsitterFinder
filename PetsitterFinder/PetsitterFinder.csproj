@@ -83,6 +83,9 @@
     <Compile Include="AddPetPage.xaml.cs">
       <DependentUpon>AddPetPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClientRequestsPage.xaml.cs">
+      <DependentUpon>ClientRequestsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyCabinetPage.xaml.cs">
       <DependentUpon>MyCabinetPage.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ClientRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientRequestsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

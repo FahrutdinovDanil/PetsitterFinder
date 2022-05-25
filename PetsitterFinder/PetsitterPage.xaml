@@ -22,7 +22,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="tbName"/>
+        <TextBox x:Name="tbName" Grid.Column="3"/>
         <Button Grid.Column="2"  Content="Отправить запрос" Click="btn_Send_Click"/>
     </Grid>
 </Page>

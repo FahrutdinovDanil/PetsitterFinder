@@ -35,6 +35,7 @@ namespace Core
             ObservableCollection<Pet> pets = new ObservableCollection<Pet>(Connection.connection.Pet.Where(p => p.IsDeleted == false || p.IsDeleted == null));
             return pets;
         }
+
         public static ObservableCollection<Petsitter> GetPetsitters()
         {
             ObservableCollection<Petsitter> petsitters = new ObservableCollection<Petsitter>(Connection.connection.Petsitter);
@@ -46,6 +47,16 @@ namespace Core
             var user = GetUser(Id);
             var pets = user.Owner.Select(o => o.Pet).ToList();
             return pets;
+        }
+        public static ObservableCollection<Request> GetRequests()
+        {
+            ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Request);
+            return requests;
+        }
+
+        public static ObservableCollection<Request> GetRequestsForClient(int Id)
+        {
+            return new ObservableCollection<Request>(Connection.connection.Request.Where(r => r.ClientId == Id));
         }
 
         public static bool AddPet(Pet pet)

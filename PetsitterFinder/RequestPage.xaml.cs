@@ -40,6 +40,7 @@ namespace PetsitterFinder
         {
             
             Request.Date = dpDate.SelectedDate;
+            Request.Status = "В ожидании";
             Request.PetssiterId = selectedPetsitter.Id;
             Request.ClientId = currentUser.Id;
             

@@ -46,5 +46,10 @@ namespace PetsitterFinder
         {
             NavigationService.Navigate(new SittersPage(currentUser));
         }
+
+        private void lb_MyRequests_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new ClientRequestsPage(currentUser));
+        }
     }
 }
