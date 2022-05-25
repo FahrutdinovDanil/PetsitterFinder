@@ -17,10 +17,10 @@ namespace Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Administrator = new HashSet<Administrator>();
-            this.Client = new HashSet<Client>();
-            this.Owner = new HashSet<Owner>();
-            this.Petsitter = new HashSet<Petsitter>();
+            this.Administrators = new HashSet<Administrator>();
+            this.Clients = new HashSet<Client>();
+            this.Owners = new HashSet<Owner>();
+            this.Petsitters = new HashSet<Petsitter>();
         }
     
         public int Id { get; set; }
@@ -29,13 +29,13 @@ namespace Core
         public Nullable<int> RoleId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Administrator> Administrator { get; set; }
+        public virtual ICollection<Administrator> Administrators { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Client> Client { get; set; }
+        public virtual ICollection<Client> Clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Owner> Owner { get; set; }
+        public virtual ICollection<Owner> Owners { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Petsitter> Petsitter { get; set; }
+        public virtual ICollection<Petsitter> Petsitters { get; set; }
         public virtual Role Role { get; set; }
     }
 }

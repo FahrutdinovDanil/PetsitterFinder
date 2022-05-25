@@ -49,7 +49,12 @@ namespace PetsitterFinder
 
         private void lb_MyRequests_Click(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new ClientRequestsPage(currentUser));
+            if (currentUser.RoleId == 3)
+                NavigationService.Navigate(new ClientRequestsPage(currentUser));
+            else if (currentUser.RoleId == 2)
+                NavigationService.Navigate(new PetsitterRequestsPage(currentUser));
+
+
         }
     }
 }

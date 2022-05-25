@@ -55,37 +55,12 @@ namespace PetsitterFinder
             //DataAccess.AddPetsitter(petsitterToAdd);
         }
 
-        private void BtnAddPet_Click(object sender, RoutedEventArgs e)
-        {
-            //if (cbPet.SelectedIndex >= 0)
-            //{
-            //    var ApplicationsPet = new ApplicationsPet();
-            //    var sel = cbPet.SelectedItem as Pet;
-            //    ApplicationsPet.PetId = sel.Id;
-            //    var isPet = DataAccess.GetPets().Where(c => c.Id == sel.Id).Count();
-            //    if (isPet == 0)
-            //    {
-            //        DataAccess.AddApplicationsPet(ApplicationsPet);
-            //        UpdatePetList();
-            //    }
-            //}
-        }
-        //private void UpdateCountryList()
-        //{
-        //    CountryLv.ItemsSource = DataAccess.GetProdCountries().Where(e => e.ProductId == selectedProduct.Id).ToList();
-        //}
-
-        private void BtnRemovePet_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void cbPet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var pet = cbPet.SelectedItem as Pet;
-            if (Request.RequestPet.Where(x=> x.Pet.Id == pet.Id).Count() == 0)
-                Request.RequestPet.Add(new RequestPet { Pet = pet });
-            lvPets.ItemsSource = Request.RequestPet;
+            if (Request.RequestPets.Where(x=> x.Pet.Id == pet.Id).Count() == 0)
+                Request.RequestPets.Add(new RequestPet { Pet = pet });
+            lvPets.ItemsSource = Request.RequestPets;
             lvPets.Items.Refresh();
 
 
@@ -96,9 +71,9 @@ namespace PetsitterFinder
             var pet = lvPets.SelectedItem as RequestPet;
             if (pet != null)
             {
-                var requestPet = Request.RequestPet.FirstOrDefault(p => p.Pet.Id == pet.Pet.Id);
-                Request.RequestPet.Remove(requestPet);
-                lvPets.ItemsSource = Request.RequestPet;
+                var requestPet = Request.RequestPets.FirstOrDefault(p => p.Pet.Id == pet.Pet.Id);
+                Request.RequestPets.Remove(requestPet);
+                lvPets.ItemsSource = Request.RequestPets;
                 lvPets.Items.Refresh();
             }
         }

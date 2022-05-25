@@ -113,7 +113,7 @@
     <Compile Include="Role.cs">
       <DependentUpon>FinderDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>FinderDB.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

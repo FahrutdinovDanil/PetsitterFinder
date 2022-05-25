@@ -14,7 +14,7 @@ namespace Core
         {
             try
             {
-                Connection.connection.User.Add(user);
+                Connection.connection.Users.Add(user);
                 Connection.connection.SaveChanges();
                 return true;
             }
@@ -42,7 +42,7 @@ namespace Core
         {
             try
             {
-                Connection.connection.Petsitter.Add(petsitter);
+                Connection.connection.Petsitters.Add(petsitter);
                 Connection.connection.SaveChanges();
                 return true;
             }
@@ -54,7 +54,7 @@ namespace Core
 
         public static bool UniqueLogin(string login)
         {
-            users = new ObservableCollection<User>(Connection.connection.User.ToList());
+            users = new ObservableCollection<User>(Connection.connection.Users.ToList());
             bool loginUnic = true;
             foreach (var i in users)
             {

@@ -11,59 +11,64 @@ namespace Core
     {
         public static User GetUser(int idUser)
         {
-            ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.User);
+            ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.Users);
             var currentUser = users.Where(u => u.Id == idUser).FirstOrDefault();
             return currentUser;
         }
 
         public static Pet GetPet(int idPet)
         {
-            ObservableCollection<Pet> users = new ObservableCollection<Pet>(Connection.connection.Pet);
+            ObservableCollection<Pet> users = new ObservableCollection<Pet>(Connection.connection.Pets);
             var currentPet = users.Where(u => u.Id == idPet).FirstOrDefault();
             return currentPet;
         }
 
         public static User GetUser(string login, string password)
         {
-            ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.User);
+            ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.Users);
             var currentUser = users.Where(u => u.Login == login && u.Password == password).FirstOrDefault();
             return currentUser;
         }
 
         public static ObservableCollection<Pet> GetPets()
         {
-            ObservableCollection<Pet> pets = new ObservableCollection<Pet>(Connection.connection.Pet.Where(p => p.IsDeleted == false || p.IsDeleted == null));
+            ObservableCollection<Pet> pets = new ObservableCollection<Pet>(Connection.connection.Pets.Where(p => p.IsDeleted == false || p.IsDeleted == null));
             return pets;
         }
 
         public static ObservableCollection<Petsitter> GetPetsitters()
         {
-            ObservableCollection<Petsitter> petsitters = new ObservableCollection<Petsitter>(Connection.connection.Petsitter);
+            ObservableCollection<Petsitter> petsitters = new ObservableCollection<Petsitter>(Connection.connection.Petsitters);
             return petsitters;
         }
 
         public static List<Pet> GetPets(int Id)
         {
             var user = GetUser(Id);
-            var pets = user.Owner.Select(o => o.Pet).ToList();
+            var pets = user.Owners.Select(o => o.Pet).ToList();
             return pets;
         }
         public static ObservableCollection<Request> GetRequests()
         {
-            ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Request);
+            ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Requests);
             return requests;
         }
 
         public static ObservableCollection<Request> GetRequestsForClient(int Id)
         {
-            return new ObservableCollection<Request>(Connection.connection.Request.Where(r => r.ClientId == Id));
+            return new ObservableCollection<Request>(Connection.connection.Requests.Where(r => r.ClientId == Id));
+        }
+
+        public static ObservableCollection<Request> GetRequestsForPetsitter(int Id)
+        {
+            return new ObservableCollection<Request>(Connection.connection.Requests.Where(r => r.PetssiterId == Id));
         }
 
         public static bool AddPet(Pet pet)
         {
             try
             {
-                Connection.connection.Pet.Add(pet);
+                Connection.connection.Pets.Add(pet);
                 Connection.connection.SaveChanges();
                 return true;
             }
@@ -77,7 +82,7 @@ namespace Core
         {
             try
             {
-                Connection.connection.Request.Add(request);
+                Connection.connection.Requests.Add(request);
                 Connection.connection.SaveChanges();
                 return true;
             }
@@ -91,7 +96,7 @@ namespace Core
         {
             try
             {
-                Connection.connection.RequestPet.Add(requestPet);
+                Connection.connection.RequestPets.Add(requestPet);
                 Connection.connection.SaveChanges();
                 return true;
             }
@@ -105,7 +110,7 @@ namespace Core
         {
             try
             {
-                Connection.connection.Owner.Add(owner);
+                Connection.connection.Owners.Add(owner);
                 Connection.connection.SaveChanges();
                 return true;
             }

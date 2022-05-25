@@ -32,7 +32,7 @@ namespace PetsitterFinder
         private void btn_NextPage_Click(object sender, RoutedEventArgs e)
         {
             Pet petToAdd = new Pet();
-            petToAdd.Owner.Add(new Owner { User = currentUser});
+            petToAdd.Owners.Add(new Owner { User = currentUser});
             petToAdd.Name= tbPetName.Text.Trim();
 
             DataAccess.AddPet(petToAdd);

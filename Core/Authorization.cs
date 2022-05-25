@@ -12,7 +12,7 @@ namespace Core
         public static ObservableCollection<User> users { get; set; }
         public static User AuthorizationUser(string login, string password)
         {
-            users = new ObservableCollection<User>(Connection.connection.User.ToList());
+            users = new ObservableCollection<User>(Connection.connection.Users.ToList());
             var userExists = users.Where(user => user.Login == login && user.Password == password).FirstOrDefault();
             if (userExists != null)
             {
@@ -25,7 +25,7 @@ namespace Core
         }
         public static void EditUser(int id, byte[] photo, string nick)
         {
-            var user = Connection.connection.User.Where(x => x.Id == id).FirstOrDefault();
+            var user = Connection.connection.Users.Where(x => x.Id == id).FirstOrDefault();
             //user.Nickname = nick;
             //user.Photo = photo;
             Connection.connection.SaveChanges();

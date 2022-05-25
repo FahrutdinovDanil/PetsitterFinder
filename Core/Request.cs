@@ -17,7 +17,7 @@ namespace Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Request()
         {
-            this.RequestPet = new HashSet<RequestPet>();
+            this.RequestPets = new HashSet<RequestPet>();
         }
     
         public int Id { get; set; }
@@ -29,6 +29,6 @@ namespace Core
         public virtual Client Client { get; set; }
         public virtual Petsitter Petsitter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequestPet> RequestPet { get; set; }
+        public virtual ICollection<RequestPet> RequestPets { get; set; }
     }
 }

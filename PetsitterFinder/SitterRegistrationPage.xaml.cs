@@ -24,7 +24,7 @@ namespace PetsitterFinder
     /// </summary>
     public partial class SitterRegistrationPage : Page
     {
-        private ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.User);
+        private ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.Users);
         private byte[] user_photo;
         public SitterRegistrationPage()
         {
