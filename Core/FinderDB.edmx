@@ -65,14 +65,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientId" Type="int" />
           <Property Name="PetssiterId" Type="int" />
           <Property Name="Status" Type="bit" />
           <Property Name="Date" Type="date" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "PetsitterFinder.dbo.RequestPet" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="RequestPet">
           <Key>
             <PropertyRef Name="Id" />
@@ -234,16 +232,10 @@
           <EntitySet Name="Pet" EntityType="Self.Pet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Petsitter" EntityType="Self.Petsitter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestPet" EntityType="Self.RequestPet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RequestPet" EntityType="Self.RequestPet" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [RequestPet].[Id] AS [Id], 
-    [RequestPet].[PetId] AS [PetId], 
-    [RequestPet].[RequestId] AS [RequestId]
-    FROM [dbo].[RequestPet] AS [RequestPet]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Administrator_User" Association="Self.FK_Administrator_User">
             <End Role="User" EntitySet="User" />
             <End Role="Administrator" EntitySet="Administrator" />
@@ -711,7 +703,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />

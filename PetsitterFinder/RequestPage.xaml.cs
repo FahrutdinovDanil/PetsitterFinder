@@ -24,6 +24,7 @@ namespace PetsitterFinder
         private static User currentUser;
         private static Petsitter selectedPetsitter;
         private static List<Pet> pets { get; set; }
+        private Request Request { get; set; }
         public RequestPage(Petsitter petsitter, User user)
         {
             InitializeComponent();
@@ -32,21 +33,23 @@ namespace PetsitterFinder
             pets = DataAccess.GetPets(user.Id);
             cbPet.ItemsSource = pets;
             cbPet.DisplayMemberPath = "Name";
+            Request = new Request();
+            
         }
         private void btn_SendRequest_Click(object sender, RoutedEventArgs e)
         {
-            Request requestToAdd = new Request();
-            requestToAdd.Date = dpDate.SelectedDate;
-            requestToAdd.PetssiterId = selectedPetsitter.Id;
-            requestToAdd.ClientId = currentUser.Id;
+            
+            Request.Date = dpDate.SelectedDate;
+            Request.PetssiterId = selectedPetsitter.Id;
+            Request.ClientId = currentUser.Id;
             
 
             RequestPet requestPetToAdd = new RequestPet();
             var selectedPet = cbPet.SelectedItem as Pet;
             requestPetToAdd.PetId = selectedPet.Id;
 
-            DataAccess.AddRequest(requestToAdd);
-            DataAccess.AddRequestPet(requestPetToAdd);
+            DataAccess.AddRequest(Request);
+            //DataAccess.AddRequestPet(requestPetToAdd);
 
             //DataAccess.AddPetsitter(petsitterToAdd);
         }
@@ -76,9 +79,27 @@ namespace PetsitterFinder
 
         }
 
-        private void cbPet_Selected(object sender, RoutedEventArgs e)
+        private void cbPet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var pet = cbPet.SelectedItem as Pet;
+            if (Request.RequestPet.Where(x=> x.Pet.Id == pet.Id).Count() == 0)
+                Request.RequestPet.Add(new RequestPet { Pet = pet });
+            lvPets.ItemsSource = Request.RequestPet;
+            lvPets.Items.Refresh();
 
+
+        }
+
+        private void lvPets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var pet = lvPets.SelectedItem as RequestPet;
+            if (pet != null)
+            {
+                var requestPet = Request.RequestPet.FirstOrDefault(p => p.Pet.Id == pet.Pet.Id);
+                Request.RequestPet.Remove(requestPet);
+                lvPets.ItemsSource = Request.RequestPet;
+                lvPets.Items.Refresh();
+            }
         }
     }
 }

@@ -26,7 +26,8 @@
         </Grid.RowDefinitions>
         <DatePicker Grid.Column="1" 
                     Grid.Row="2" 
-                    x:Name="dpDate"/>
+                    x:Name="dpDate"
+                    />
 
         <Button x:Name="BtnAddPet" 
                 Content="Добавить"
@@ -45,7 +46,8 @@
                 Click="BtnRemovePet_Click"/>
 
         <ListView x:Name="lvPets"
-                   ItemsSource="{Binding pets}"
+                   ItemsSource="{Binding Request.RequestPet}"
+                   SelectionChanged="lvPets_SelectionChanged"
                    Width="150"
                    Height="150"
                    Grid.Column="3"
@@ -64,6 +66,7 @@
                   x:Name="cbPet"
                   Grid.Row="2"
                   Grid.Column="2"
+                  SelectionChanged="cbPet_SelectionChanged"
                    HorizontalContentAlignment="Center"
                   VerticalContentAlignment="Center"
                   FontSize="15"
