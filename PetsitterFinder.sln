@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetsitterFinder", "Petsitte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{59720D61-2DDE-4411-845D-2E0553F1F4F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetsitterFinderAPI", "PetsitterFinderAPI\PetsitterFinderAPI.csproj", "{03B2A015-220F-4860-B025-EE2193E3347C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{59720D61-2DDE-4411-845D-2E0553F1F4F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59720D61-2DDE-4411-845D-2E0553F1F4F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59720D61-2DDE-4411-845D-2E0553F1F4F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03B2A015-220F-4860-B025-EE2193E3347C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03B2A015-220F-4860-B025-EE2193E3347C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03B2A015-220F-4860-B025-EE2193E3347C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03B2A015-220F-4860-B025-EE2193E3347C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
