@@ -7,35 +7,34 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Core
+namespace Core.DB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Pet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Pet()
         {
-            this.Administrators = new HashSet<Administrator>();
-            this.Clients = new HashSet<Client>();
             this.Owners = new HashSet<Owner>();
-            this.Petsitters = new HashSet<Petsitter>();
+            this.RequestPets = new HashSet<RequestPet>();
         }
     
         public int Id { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public string Name { get; set; }
+        public string Вreed { get; set; }
+        public byte[] Photo { get; set; }
+        public Nullable<int> Year { get; set; }
+        public Nullable<int> Month { get; set; }
+        public Nullable<int> Size { get; set; }
+        public string Discription { get; set; }
+        public string Gender { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Administrator> Administrators { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Client> Clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Owner> Owners { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Petsitter> Petsitters { get; set; }
-        public virtual Role Role { get; set; }
+        public virtual ICollection<RequestPet> RequestPets { get; set; }
     }
 }

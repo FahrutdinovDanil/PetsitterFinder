@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.DB;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -59,6 +60,7 @@ namespace Core
             var pets = user.Owners.Select(o => o.Pet).ToList();
             return pets;
         }
+
         public static ObservableCollection<Request> GetRequests()
         {
             ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Requests.Where(p => p.State == false));
@@ -73,6 +75,20 @@ namespace Core
         public static ObservableCollection<Request> GetRequestsForPetsitter(int Id)
         {
             return new ObservableCollection<Request>(GetRequests().Where(r => r.PetssiterId == Id));
+        }
+
+        public static void SavePet(Pet pet)
+        {
+            if (GetPets().FirstOrDefault(a => a.Id == pet.Id) == null)
+                Connection.connection.Pets.Add(pet);
+
+            Connection.connection.SaveChanges();
+        }
+
+        public static void RemovePet(int id)
+        {
+            Connection.connection.Pets.Remove(GetPet(id));
+            Connection.connection.SaveChanges();
         }
 
         public static bool AddPet(Pet pet)

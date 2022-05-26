@@ -7,31 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Core
+namespace Core.DB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Petsitter
+    public partial class Request
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Petsitter()
+        public Request()
         {
-            this.Requests = new HashSet<Request>();
+            this.RequestPets = new HashSet<RequestPet>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public byte[] Photo { get; set; }
-        public Nullable<bool> Confirmed { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
+        public Nullable<int> ClientId { get; set; }
+        public Nullable<int> PetssiterId { get; set; }
+        public string Status { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<bool> State { get; set; }
     
+        public virtual Client Client { get; set; }
+        public virtual Petsitter Petsitter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Request> Requests { get; set; }
-        public virtual User User { get; set; }
+        public virtual ICollection<RequestPet> RequestPets { get; set; }
     }
 }

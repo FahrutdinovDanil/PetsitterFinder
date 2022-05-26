@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.DB;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
