@@ -9,6 +9,7 @@ namespace Core
 {
     public class DataAccess
     {
+        private static ObservableCollection<Client> clients = new ObservableCollection<Client>(Connection.connection.Client);
         public static User GetUser(int idUser)
         {
             ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.Users);
@@ -35,6 +36,16 @@ namespace Core
             ObservableCollection<Pet> pets = new ObservableCollection<Pet>(Connection.connection.Pets.Where(p => p.IsDeleted == false || p.IsDeleted == null));
             return pets;
         }
+        public static ObservableCollection<Client> GetClients()
+        {
+            ObservableCollection<Client> clients = new ObservableCollection<Client>(Connection.connection.Client);
+            return clients;
+        }
+
+        public static Client GetClientById(int id)
+        {
+            return clients.Where(c => c.Id == id).FirstOrDefault();
+        }
 
         public static ObservableCollection<Petsitter> GetPetsitters()
         {
@@ -50,18 +61,18 @@ namespace Core
         }
         public static ObservableCollection<Request> GetRequests()
         {
-            ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Requests);
+            ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Requests.Where(p => p.State == false));
             return requests;
         }
 
         public static ObservableCollection<Request> GetRequestsForClient(int Id)
         {
-            return new ObservableCollection<Request>(Connection.connection.Requests.Where(r => r.ClientId == Id));
+            return new ObservableCollection<Request>(GetRequests().Where(r => r.ClientId == Id));
         }
 
         public static ObservableCollection<Request> GetRequestsForPetsitter(int Id)
         {
-            return new ObservableCollection<Request>(Connection.connection.Requests.Where(r => r.PetssiterId == Id));
+            return new ObservableCollection<Request>(GetRequests().Where(r => r.PetssiterId == Id));
         }
 
         public static bool AddPet(Pet pet)
@@ -111,6 +122,43 @@ namespace Core
             try
             {
                 Connection.connection.Owners.Add(owner);
+                Connection.connection.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static Client GetClient(User user)
+        {
+            return GetClients().FirstOrDefault(c => c.UserId == user.Id);
+        }
+
+        public static Petsitter GetPetsitter(User user)
+        {
+            return GetPetsitters().FirstOrDefault(c => c.UserId == user.Id);
+        }
+
+        public static bool EditRequest(Request request)
+        {
+            try
+            {
+                Connection.connection.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool DeleteRequest(Request request)
+        {
+            request.State = true;
+            try
+            {
                 Connection.connection.SaveChanges();
                 return true;
             }

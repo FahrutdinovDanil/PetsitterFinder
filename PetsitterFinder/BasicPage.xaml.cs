@@ -51,7 +51,7 @@ namespace PetsitterFinder
         {
             if (currentUser.RoleId == 3)
                 NavigationService.Navigate(new ClientRequestsPage(currentUser));
-            else if (currentUser.RoleId == 2)
+            else
                 NavigationService.Navigate(new PetsitterRequestsPage(currentUser));
 
 

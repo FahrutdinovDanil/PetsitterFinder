@@ -27,7 +27,7 @@ namespace PetsitterFinder
         {
             InitializeComponent();
             currentUser = user;
-            lvRequests.ItemsSource = DataAccess.GetRequestsForClient(currentUser.Id);
+            lvRequests.ItemsSource = DataAccess.GetRequestsForClient(DataAccess.GetClient(currentUser).Id);
         }
     }
 }

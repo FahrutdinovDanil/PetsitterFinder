@@ -70,6 +70,7 @@
           <Property Name="PetssiterId" Type="int" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="Date" Type="date" />
+          <Property Name="State" Type="bit" />
         </EntityType>
         <EntityType Name="RequestPet">
           <Key>
@@ -410,6 +411,7 @@
           <NavigationProperty Name="Client" Relationship="PetsitterFinderModel.FK_Applications_Client" FromRole="Request" ToRole="Client" />
           <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Applications_Petsitter" FromRole="Request" ToRole="Petsitter" />
           <NavigationProperty Name="RequestPets" Relationship="PetsitterFinderModel.FK_RequestPet_Request" FromRole="Request" ToRole="RequestPet" />
+          <Property Name="State" Type="Boolean" />
         </EntityType>
         <EntityType Name="RequestPet">
           <Key>
@@ -643,6 +645,7 @@
           <EntitySetMapping Name="Requests">
             <EntityTypeMapping TypeName="PetsitterFinderModel.Request">
               <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PetssiterId" ColumnName="PetssiterId" />

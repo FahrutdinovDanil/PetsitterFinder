@@ -34,20 +34,15 @@ namespace PetsitterFinder
             cbPet.ItemsSource = pets;
             cbPet.DisplayMemberPath = "Name";
             Request = new Request();
-            
+
         }
         private void btn_SendRequest_Click(object sender, RoutedEventArgs e)
         {
-            
             Request.Date = dpDate.SelectedDate;
+            Request.State = false;
             Request.Status = "В ожидании";
             Request.PetssiterId = selectedPetsitter.Id;
-            Request.ClientId = currentUser.Id;
-            
-
-            RequestPet requestPetToAdd = new RequestPet();
-            var selectedPet = cbPet.SelectedItem as Pet;
-            requestPetToAdd.PetId = selectedPet.Id;
+            Request.ClientId = DataAccess.GetClient (currentUser).Id;
 
             DataAccess.AddRequest(Request);
             //DataAccess.AddRequestPet(requestPetToAdd);
@@ -62,8 +57,6 @@ namespace PetsitterFinder
                 Request.RequestPets.Add(new RequestPet { Pet = pet });
             lvPets.ItemsSource = Request.RequestPets;
             lvPets.Items.Refresh();
-
-
         }
 
         private void lvPets_SelectionChanged(object sender, SelectionChangedEventArgs e)

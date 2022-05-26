@@ -25,6 +25,7 @@ namespace Core
         public Nullable<int> PetssiterId { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<bool> State { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Petsitter Petsitter { get; set; }

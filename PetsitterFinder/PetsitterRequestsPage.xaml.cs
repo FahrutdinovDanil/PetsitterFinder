@@ -27,8 +27,31 @@ namespace PetsitterFinder
         {
             InitializeComponent();
             currentUser = user;
-            lvRequests.ItemsSource = DataAccess.GetRequestsForPetsitter(currentUser.Id);
-            DataContext = this;
+            lvRequests.ItemsSource = DataAccess.GetRequestsForPetsitter(DataAccess.GetPetsitter(currentUser).Id);
+        }
+
+        private void btn_Accept_Click(object sender, RoutedEventArgs e)
+        {
+            var request = lvRequests.SelectedItem as Request;
+            request.Status = "Принято";
+            DataAccess.EditRequest(request);
+            lvRequests.Items.Refresh();
+        }
+
+        private void btn_Reject_Click(object sender, RoutedEventArgs e)
+        {
+            var request = lvRequests.SelectedItem as Request;
+            request.Status = "Отказано";
+            DataAccess.EditRequest(request);
+            lvRequests.Items.Refresh();
+        }
+
+        private void btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var request = lvRequests.SelectedItem as Request;
+            request.Status = "Удален";
+            DataAccess.DeleteRequest(request);
+            NavigationService.Navigate(new PetsitterRequestsPage(currentUser));
         }
     }
 }
