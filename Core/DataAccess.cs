@@ -32,10 +32,19 @@ namespace Core
             return currentUser;
         }
 
-        public static ObservableCollection<Pet> GetPets()
+        //public static ObservableCollection<Pet> GetPets()
+        //{
+        //    ObservableCollection<Pet> pets = new ObservableCollection<Pet>(Connection.connection.Pets.Where(p => p.IsDeleted == false || p.IsDeleted == null));
+        //    return pets;
+        //}
+        //public static List<Request> GetRequest()
+        //{
+        //    return new List<Request>(Connection.connection.Requests.ToList());
+        //}
+
+        public static List<Pet> GetPets()
         {
-            ObservableCollection<Pet> pets = new ObservableCollection<Pet>(Connection.connection.Pets.Where(p => p.IsDeleted == false || p.IsDeleted == null));
-            return pets;
+            return new List<Pet>(Connection.connection.Pets.Where(p => p.IsDeleted == false || p.IsDeleted == null)).ToList();
         }
         public static ObservableCollection<Client> GetClients()
         {
@@ -48,9 +57,14 @@ namespace Core
             return clients.Where(c => c.Id == id).FirstOrDefault();
         }
 
-        public static ObservableCollection<Petsitter> GetPetsitters()
+        //public static ObservableCollection<Petsitter> GetPetsitters()
+        //{
+        //    ObservableCollection<Petsitter> petsitters = new ObservableCollection<Petsitter>(Connection.connection.Petsitters);
+        //    return petsitters;
+        //}
+        public static List<Petsitter> GetPetsitters()
         {
-            ObservableCollection<Petsitter> petsitters = new ObservableCollection<Petsitter>(Connection.connection.Petsitters);
+            List<Petsitter> petsitters = new List<Petsitter>(Connection.connection.Petsitters);
             return petsitters;
         }
 
@@ -67,16 +81,22 @@ namespace Core
             return requests;
         }
 
-        public static ObservableCollection<Request> GetRequestsForClient(int Id)
+        public static List<Request> GetRequestsForClient(int Id)
         {
-            return new ObservableCollection<Request>(GetRequests().Where(r => r.ClientId == Id));
+            return new List<Request>(GetRequests().Where(r => r.ClientId == Id));
         }
-
-        public static ObservableCollection<Request> GetRequestsForPetsitter(int Id)
+        //public static List<Request> GetRequest()
+        //{
+        //    return new List<Request>(Connection.connection.Requests.ToList());
+        //}
+        //public static ObservableCollection<Request> GetRequestsForPetsitter(int Id)
+        //{
+        //    return new ObservableCollection<Request>(GetRequests().Where(r => r.PetssiterId == Id));
+        //}
+        public static List<Request> GetRequestsForPetsitter(int Id)
         {
-            return new ObservableCollection<Request>(GetRequests().Where(r => r.PetssiterId == Id));
+            return new List<Request>(GetRequests().Where(r => r.PetssiterId == Id));
         }
-
         public static void SavePet(Pet pet)
         {
             if (GetPets().FirstOrDefault(a => a.Id == pet.Id) == null)
@@ -169,6 +189,11 @@ namespace Core
                 return false;
             }
         }
+        //public void EditRequest(int id)
+        //{
+        //    Request obj = (Request)Connection.connection.Petsitters.Where(a => a.Id == id);
+        //    Connection.connection.SaveChanges();
+        //}
 
         public static bool DeleteRequest(Request request)
         {

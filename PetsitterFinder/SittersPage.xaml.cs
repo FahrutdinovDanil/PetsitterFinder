@@ -23,7 +23,7 @@ namespace PetsitterFinder
     /// </summary>
     public partial class SittersPage : Page
     {
-        private static ObservableCollection<Petsitter> sitters { get; set; }
+        private static List<Petsitter> sitters { get; set; }
         public static User currentUser;
         public SittersPage(User user)
         {
