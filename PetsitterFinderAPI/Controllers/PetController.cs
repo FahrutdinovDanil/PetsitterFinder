@@ -31,20 +31,20 @@ namespace PetsitterFinderAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Pet pet)
+        public ActionResult Post([FromBody] PetModel modelPet)
         {
-            DataAccess.SavePet(pet);
+            DataAccess.SavePet(new Pet(modelPet));
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Pet> Put(int id, [FromBody] Pet pet)
+        public ActionResult<PetModel> Put(int id, [FromBody] PetModel modelPet)
         {
-            pet.Id = id;
+            modelPet.Id = id;
             if (DataAccess.GetPet(id) == null)
                 return BadRequest();
 
-            DataAccess.SavePet(pet);
+            DataAccess.UpdatePet(new Pet(modelPet));
             return Ok(new PetModel(DataAccess.GetPet(id)));
         }
 

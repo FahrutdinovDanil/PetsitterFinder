@@ -85,6 +85,34 @@ namespace Core
             Connection.connection.SaveChanges();
         }
 
+        public static bool EditPet(Pet pet)
+        {
+            try
+            {
+                Connection.connection.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public static void UpdatePet(Pet pet)
+        {
+            Pet newPet = GetPet(pet.Id);
+            newPet.Discription = pet.Discription;
+            newPet.Name = pet.Name;
+            newPet.Year = pet.Year;
+            newPet.Month = pet.Month;
+            newPet.Size = pet.Size;
+            newPet.Вreed = pet.Вreed;
+            newPet.Gender = pet.Gender;
+            newPet.IsDeleted = pet.IsDeleted;
+            SavePet(newPet);
+        }
+
         public static void RemovePet(int id)
         {
             Connection.connection.Pets.Remove(GetPet(id));
