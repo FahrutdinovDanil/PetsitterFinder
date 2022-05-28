@@ -24,12 +24,21 @@ namespace PetsitterFinder
     public partial class SittersPage : Page
     {
         private static List<Petsitter> sitters { get; set; }
+        public static int actualPage;
         public static User currentUser;
         public SittersPage(User user)
         {
             InitializeComponent();
             currentUser = user;
             sitters = DataAccess.GetPetsitters();
+            foreach (var sitter in sitters)
+            { 
+                if (currentUser.Id == sitter.UserId)
+                {
+                    sitters.Remove(sitter);
+                }
+                break;
+            }
             lvPetsitters.ItemsSource = sitters;
             DataContext = this;
         }
@@ -38,6 +47,22 @@ namespace PetsitterFinder
         {
             var selectedSitter = lvPetsitters.SelectedItem as Petsitter;
             NavigationService.Navigate(new PetsitterPage(selectedSitter, currentUser));
+        }
+
+        public void Filter()
+        {
+            var filterSitter = DataAccess.GetPetsitters();
+
+            if (tb_search.Text != "")
+            {
+                //filterSitter = Connection.connection.Petsitters.Where(z => (z.Name.Contains(tb_search.Text)));
+            }
+        }
+
+        private void tb_search_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            actualPage = 0;
+            Filter();
         }
     }
 }

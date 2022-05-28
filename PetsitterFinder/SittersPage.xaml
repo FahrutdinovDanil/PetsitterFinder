@@ -26,6 +26,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <TextBlock Text="Найти:" FontSize="18"  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Column="2"/>
+        <TextBox x:Name="tb_search" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Height="30" VerticalContentAlignment="Center" FontSize="18" VerticalAlignment="Center" SelectionChanged="tb_search_SelectionChanged"/>
+
         <ListView x:Name="lvPetsitters" ItemsSource="{Binding sitters}"
                   Grid.Column="1"
                   Grid.Row="1"
