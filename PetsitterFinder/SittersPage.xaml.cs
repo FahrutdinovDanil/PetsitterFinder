@@ -23,13 +23,14 @@ namespace PetsitterFinder
     /// </summary>
     public partial class SittersPage : Page
     {
-        private static ObservableCollection<Petsitter> sitters { get; set; }
+        private static List<Petsitter> sitters { get; set; }
         public static User currentUser;
+        public static int actualPage;
         public SittersPage(User user)
         {
             InitializeComponent();
             currentUser = user;
-            sitters = DataAccess.GetPetsitters();
+            sitters = DataAccess.GetPetsitters().ToList();
             lvPetsitters.ItemsSource = sitters;
             foreach (var sitter in sitters)
             {
@@ -41,13 +42,29 @@ namespace PetsitterFinder
             }
             lvPetsitters.ItemsSource = sitters;
             DataContext = this;
-            DataContext = this;
         }
 
         private void lvPetsitters_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedSitter = lvPetsitters.SelectedItem as Petsitter;
             NavigationService.Navigate(new PetsitterPage(selectedSitter, currentUser));
+        }
+
+        public void Filter()
+        {
+            var filterPetsitters = sitters;
+
+            if (tb_search.Text != "")
+            {
+                filterPetsitters = sitters.Where(z => (z.Name.Contains(tb_search.Text))).ToList();
+            }
+            lvPetsitters.ItemsSource = filterPetsitters;
+        }
+
+        private void tb_search_TextChanged(object sender, RoutedEventArgs e)
+        {
+            actualPage = 0;
+            Filter();
         }
     }
 }
