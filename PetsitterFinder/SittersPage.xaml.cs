@@ -31,6 +31,16 @@ namespace PetsitterFinder
             currentUser = user;
             sitters = DataAccess.GetPetsitters();
             lvPetsitters.ItemsSource = sitters;
+            foreach (var sitter in sitters)
+            {
+                if (currentUser.Id == sitter.UserId)
+                {
+                    sitters.Remove(sitter);
+                }
+                break;
+            }
+            lvPetsitters.ItemsSource = sitters;
+            DataContext = this;
             DataContext = this;
         }
 
