@@ -48,21 +48,5 @@ namespace PetsitterFinder
             var selectedSitter = lvPetsitters.SelectedItem as Petsitter;
             NavigationService.Navigate(new PetsitterPage(selectedSitter, currentUser));
         }
-
-        public void Filter()
-        {
-            var filterSitter = DataAccess.GetPetsitters();
-
-            if (tb_search.Text != "")
-            {
-                //filterSitter = Connection.connection.Petsitters.Where(z => (z.Name.Contains(tb_search.Text)));
-            }
-        }
-
-        private void tb_search_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            actualPage = 0;
-            Filter();
-        }
     }
 }
