@@ -32,20 +32,18 @@ namespace PetsitterFinder
             currentUser = user;
             sitters = DataAccess.GetPetsitters().ToList();
             lvPetsitters.ItemsSource = sitters;
-            foreach (var sitter in sitters)
+            foreach (var sitter in sitters.ToList())
             {
                 if (currentUser.Id == sitter.UserId)
                 {
                     sitters.Remove(sitter);
                 }
-                break;
             }
             lvPetsitters.ItemsSource = sitters;
-            DataContext = this;
         }
 
         private void lvPetsitters_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        {  
             var selectedSitter = lvPetsitters.SelectedItem as Petsitter;
             NavigationService.Navigate(new PetsitterPage(selectedSitter, currentUser));
         }

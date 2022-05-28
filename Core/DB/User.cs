@@ -18,9 +18,10 @@ namespace Core.DB
         public User()
         {
             this.Administrators = new HashSet<Administrator>();
-            this.Clients = new HashSet<Client>();
             this.Owners = new HashSet<Owner>();
             this.Petsitters = new HashSet<Petsitter>();
+            this.Clients = new HashSet<Client>();
+            this.Requests = new HashSet<Request>();
         }
     
         public int Id { get; set; }
@@ -31,11 +32,13 @@ namespace Core.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Administrator> Administrators { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Client> Clients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Owner> Owners { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Petsitter> Petsitters { get; set; }
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Client> Clients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }

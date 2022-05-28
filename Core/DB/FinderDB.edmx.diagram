@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="92862035991b43a8973309b5c849e486" Name="Diagram1" ZoomLevel="59">
-        <EntityTypeShape EntityType="PetsitterFinderModel.Client" Width="1.5" PointX="5.25" PointY="14.125" />
+      <Diagram DiagramId="92862035991b43a8973309b5c849e486" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="PetsitterFinderModel.Administrator" Width="1.5" PointX="5.625" PointY="11.625" />
         <EntityTypeShape EntityType="PetsitterFinderModel.Owner" Width="1.5" PointX="8.625" PointY="14.375" />
         <EntityTypeShape EntityType="PetsitterFinderModel.Pet" Width="1.5" PointX="6.375" PointY="6.75" />
         <EntityTypeShape EntityType="PetsitterFinderModel.Petsitter" Width="1.5" PointX="5.625" PointY="17.875" />
-        <EntityTypeShape EntityType="PetsitterFinderModel.Request" Width="1.5" PointX="7.875" PointY="17.25" />
         <EntityTypeShape EntityType="PetsitterFinderModel.RequestPet" Width="1.5" PointX="10.125" PointY="17.5" />
         <EntityTypeShape EntityType="PetsitterFinderModel.Role" Width="1.5" PointX="1.125" PointY="14.625" />
         <EntityTypeShape EntityType="PetsitterFinderModel.sysdiagram" Width="1.5" PointX="2.875" PointY="8.5" />
         <EntityTypeShape EntityType="PetsitterFinderModel.User" Width="1.5" PointX="3.375" PointY="14" />
         <AssociationConnector Association="PetsitterFinderModel.FK_Administrator_User" />
-        <AssociationConnector Association="PetsitterFinderModel.FK_Applications_Client" />
-        <AssociationConnector Association="PetsitterFinderModel.FK_Client_User" />
         <AssociationConnector Association="PetsitterFinderModel.FK_Owner_Pet" />
         <AssociationConnector Association="PetsitterFinderModel.FK_Owner_User" />
         <AssociationConnector Association="PetsitterFinderModel.FK_RequestPet_Pet" />
-        <AssociationConnector Association="PetsitterFinderModel.FK_Applications_Petsitter" />
         <AssociationConnector Association="PetsitterFinderModel.FK_Petsitter_User" />
-        <AssociationConnector Association="PetsitterFinderModel.FK_RequestPet_Request" />
         <AssociationConnector Association="PetsitterFinderModel.FK_User_Role" />
+        <EntityTypeShape EntityType="PetsitterFinderModel.Client" Width="1.5" PointX="5.625" PointY="14.25" />
+        <EntityTypeShape EntityType="PetsitterFinderModel.Request" Width="1.5" PointX="7.875" PointY="18" />
+        <AssociationConnector Association="PetsitterFinderModel.FK_Client_User" />
+        <AssociationConnector Association="PetsitterFinderModel.FK_Applications_Petsitter" />
+        <AssociationConnector Association="PetsitterFinderModel.FK_Request_User" />
+        <AssociationConnector Association="PetsitterFinderModel.FK_RequestPet_Request" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

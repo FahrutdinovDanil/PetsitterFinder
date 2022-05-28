@@ -21,14 +21,15 @@ namespace Core.DB
         }
     
         public int Id { get; set; }
-        public Nullable<int> ClientId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public Nullable<int> PetssiterId { get; set; }
         public string Status { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
         public Nullable<bool> State { get; set; }
+        public Nullable<System.DateTime> DateStart { get; set; }
+        public Nullable<System.DateTime> DateFinish { get; set; }
     
-        public virtual Client Client { get; set; }
         public virtual Petsitter Petsitter { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequestPet> RequestPets { get; set; }
     }

@@ -29,7 +29,7 @@ namespace Core
         {
             try
             {
-                Connection.connection.Client.Add(client);
+                Connection.connection.Clients.Add(client);
                 Connection.connection.SaveChanges();
                 return true;
             }

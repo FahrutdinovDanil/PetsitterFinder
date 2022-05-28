@@ -10,7 +10,7 @@ namespace Core
 {
     public class DataAccess
     {
-        private static ObservableCollection<Client> clients = new ObservableCollection<Client>(Connection.connection.Client);
+        private static ObservableCollection<Client> clients = new ObservableCollection<Client>(Connection.connection.Clients);
         public static User GetUser(int idUser)
         {
             ObservableCollection<User> users = new ObservableCollection<User>(Connection.connection.Users);
@@ -39,7 +39,7 @@ namespace Core
         }
         public static ObservableCollection<Client> GetClients()
         {
-            ObservableCollection<Client> clients = new ObservableCollection<Client>(Connection.connection.Client);
+            ObservableCollection<Client> clients = new ObservableCollection<Client>(Connection.connection.Clients);
             return clients;
         }
 
@@ -69,7 +69,7 @@ namespace Core
 
         public static ObservableCollection<Request> GetRequestsForClient(int Id)
         {
-            return new ObservableCollection<Request>(GetRequests().Where(r => r.ClientId == Id));
+            return new ObservableCollection<Request>(GetRequests().Where(r => r.UserId == Id));
         }
 
         public static ObservableCollection<Request> GetRequestsForPetsitter(int Id)

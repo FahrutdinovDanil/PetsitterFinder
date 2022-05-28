@@ -38,14 +38,14 @@ namespace PetsitterFinder
 
         }
         private void btn_SendRequest_Click(object sender, RoutedEventArgs e)
-        {
-            Request.Date = dpDate.SelectedDate;
+        { 
+            Request.DateStart = dpDate.SelectedDate;
             Request.State = false;
             Request.Status = "В ожидании";
             Request.PetssiterId = selectedPetsitter.Id;
-            Request.ClientId = DataAccess.GetClient (currentUser).Id;
-
+            Request.UserId = currentUser.Id;
             DataAccess.AddRequest(Request);
+            //DataAccess.AddRequest(Request);
             //DataAccess.AddRequestPet(requestPetToAdd);
 
             //DataAccess.AddPetsitter(petsitterToAdd);

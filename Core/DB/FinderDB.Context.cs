@@ -25,15 +25,15 @@ namespace Core.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Administrator> Administrators { get; set; }
         public virtual DbSet<Owner> Owners { get; set; }
         public virtual DbSet<Pet> Pets { get; set; }
         public virtual DbSet<Petsitter> Petsitters { get; set; }
-        public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<RequestPet> RequestPets { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
     }
 }
