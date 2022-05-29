@@ -123,6 +123,18 @@ namespace Core
             Connection.connection.Pets.Remove(GetPet(id));
             Connection.connection.SaveChanges();
         }
+        public static OverexposuredDate GetOverexposuredDate(int idDate)
+        {
+            ObservableCollection<OverexposuredDate> overexposuredDates = new ObservableCollection<OverexposuredDate>(Connection.connection.OverexposuredDates);
+            var currentDate = overexposuredDates.Where(u => u.Id == idDate).FirstOrDefault();
+            return currentDate;
+        }
+
+        public static void RemoveOverexposuredDate(int id)
+        {
+            Connection.connection.OverexposuredDates.Remove(GetOverexposuredDate(id));
+            Connection.connection.SaveChanges();
+        }
 
         public static bool AddPet(Pet pet)
         {

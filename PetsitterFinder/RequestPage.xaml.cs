@@ -43,7 +43,7 @@ namespace PetsitterFinder
             overexposuredDates = DataAccess.GetOverexposuredDates().ToList();
             foreach (var date in overexposuredDates)
             {
-                    cldDate.BlackoutDates.Add(new CalendarDateRange(Convert.ToDateTime(date.Date)));
+                cldDate.BlackoutDates.Add(new CalendarDateRange(Convert.ToDateTime(date.Date)));
             }
 
         }

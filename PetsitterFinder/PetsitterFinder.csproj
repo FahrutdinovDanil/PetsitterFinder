@@ -170,6 +170,7 @@
     <Compile Include="AddPetPage.xaml.cs">
       <DependentUpon>AddPetPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CalenderHelper.cs" />
     <Compile Include="ClientRequestsPage.xaml.cs">
       <DependentUpon>ClientRequestsPage.xaml</DependentUpon>
     </Compile>

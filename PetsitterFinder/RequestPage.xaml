@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:PetsitterFinder"
+
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RequestPage">
@@ -30,9 +31,18 @@
                   Grid.RowSpan="2"
                   Grid.Row="1" 
                   x:Name="cldDate"
+                  DisplayDateStart="{x:Static system:DateTime.Now}"
                   SelectedDatesChanged="cldDate_SelectedDatesChanged" SelectionMode="MultipleRange">
-            <Calendar.BlackoutDates>
-            </Calendar.BlackoutDates>
+            <Calendar.CalendarDayButtonStyle>
+                <Style TargetType="CalendarDayButton" BasedOn="{StaticResource {x:Type CalendarDayButton}}">
+                    <Style.Triggers>
+                        <Trigger Property="IsBlackedOut" Value="True">
+                            <Setter Property="Background" Value="DeepPink"/>
+                            <Setter Property="local:CalenderHelper.IsBlackOutDisabled" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Calendar.CalendarDayButtonStyle>
         </Calendar>
         <Label Grid.Row="3" Grid.Column="1">Selected dates:</Label>
         <ListView x:Name="lvDates" ItemsSource="{Binding ElementName=cldDate, Path=SelectedDates}"  Grid.Row="4" Grid.Column="1" MinHeight="150" />

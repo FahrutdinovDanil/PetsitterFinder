@@ -22,6 +22,7 @@ namespace PetsitterFinder
     /// </summary>
     public partial class PetsitterRequestsPage : Page
     {
+        private static List<OverexposuredDate> overexposuredDates { get; set; }
         private static List<Request> requests { get; set; }
         private static User currentUser;
         public PetsitterRequestsPage(User user)
@@ -41,7 +42,16 @@ namespace PetsitterFinder
 
         private void btn_Reject_Click(object sender, RoutedEventArgs e)
         {
+            overexposuredDates = DataAccess.GetOverexposuredDates().ToList();
             var request = lvRequests.SelectedItem as Request;
+
+            foreach (var reques in overexposuredDates.ToList())
+            {
+                if (request.Id == reques.RequestId)
+                {
+                    DataAccess.RemoveOverexposuredDate(reques.Id);
+                }
+            }
             request.Status = "Отказано";
             DataAccess.EditRequest(request);
             lvRequests.Items.Refresh();
@@ -49,7 +59,15 @@ namespace PetsitterFinder
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
+            overexposuredDates = DataAccess.GetOverexposuredDates().ToList();
             var request = lvRequests.SelectedItem as Request;
+            foreach (var reques in overexposuredDates.ToList())
+            {
+                if (request.Id == reques.RequestId)
+                {
+                    DataAccess.RemoveOverexposuredDate(reques.Id);
+                }
+            }
             request.Status = "Удален";
             DataAccess.DeleteRequest(request);
             NavigationService.Navigate(new PetsitterRequestsPage(currentUser));
