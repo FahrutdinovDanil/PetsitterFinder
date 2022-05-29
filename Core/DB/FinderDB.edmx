@@ -24,6 +24,14 @@
           <Property Name="UserId" Type="int" />
           <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="OverexposuredDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="RequestId" Type="int" />
+        </EntityType>
         <EntityType Name="Owner">
           <Key>
             <PropertyRef Name="Id" />
@@ -70,8 +78,6 @@
           <Property Name="PetssiterId" Type="int" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="State" Type="bit" />
-          <Property Name="DateStart" Type="date" />
-          <Property Name="DateFinish" Type="date" />
         </EntityType>
         <EntityType Name="RequestPet">
           <Key>
@@ -140,6 +146,18 @@
             </Principal>
             <Dependent Role="Client">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OverexposuredDates_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="0..1" />
+          <End Role="OverexposuredDates" Type="Self.OverexposuredDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OverexposuredDates">
+              <PropertyRef Name="RequestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -230,6 +248,7 @@
         <EntityContainer Name="Хранилище PetsitterFinderModelContainer">
           <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OverexposuredDates" EntityType="Self.OverexposuredDates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pet" EntityType="Self.Pet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Petsitter" EntityType="Self.Petsitter" Schema="dbo" store:Type="Tables" />
@@ -249,6 +268,10 @@
           <AssociationSet Name="FK_Client_User" Association="Self.FK_Client_User">
             <End Role="User" EntitySet="User" />
             <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OverexposuredDates_Request" Association="Self.FK_OverexposuredDates_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="OverexposuredDates" EntitySet="OverexposuredDates" />
           </AssociationSet>
           <AssociationSet Name="FK_Owner_Pet" Association="Self.FK_Owner_Pet">
             <End Role="Pet" EntitySet="Pet" />
@@ -317,10 +340,15 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="Clients" EntityType="PetsitterFinderModel.Client" />
-          <EntitySet Name="Requests" EntityType="PetsitterFinderModel.Request" />
           <AssociationSet Name="FK_Client_User" Association="PetsitterFinderModel.FK_Client_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <EntitySet Name="OverexposuredDates" EntityType="PetsitterFinderModel.OverexposuredDate" />
+          <EntitySet Name="Requests" EntityType="PetsitterFinderModel.Request" />
+          <AssociationSet Name="FK_OverexposuredDates_Request" Association="PetsitterFinderModel.FK_OverexposuredDates_Request">
+            <End Role="Request" EntitySet="Requests" />
+            <End Role="OverexposuredDate" EntitySet="OverexposuredDates" />
           </AssociationSet>
           <AssociationSet Name="FK_Applications_Petsitter" Association="PetsitterFinderModel.FK_Applications_Petsitter">
             <End Role="Petsitter" EntitySet="Petsitters" />
@@ -514,21 +542,6 @@
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Client_User" FromRole="Client" ToRole="User" />
         </EntityType>
-        <EntityType Name="Request">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="PetssiterId" Type="Int32" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="Boolean" />
-          <Property Name="DateStart" Type="DateTime" Precision="0" />
-          <Property Name="DateFinish" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Applications_Petsitter" FromRole="Request" ToRole="Petsitter" />
-          <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Request_User" FromRole="Request" ToRole="User" />
-          <NavigationProperty Name="RequestPets" Relationship="PetsitterFinderModel.FK_RequestPet_Request" FromRole="Request" ToRole="RequestPet" />
-        </EntityType>
         <Association Name="FK_Client_User">
           <End Type="PetsitterFinderModel.User" Role="User" Multiplicity="0..1" />
           <End Type="PetsitterFinderModel.Client" Role="Client" Multiplicity="*" />
@@ -538,6 +551,41 @@
             </Principal>
             <Dependent Role="Client">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OverexposuredDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="RequestId" Type="Int32" />
+          <NavigationProperty Name="Request" Relationship="PetsitterFinderModel.FK_OverexposuredDates_Request" FromRole="OverexposuredDate" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="PetssiterId" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="OverexposuredDates" Relationship="PetsitterFinderModel.FK_OverexposuredDates_Request" FromRole="Request" ToRole="OverexposuredDate" />
+          <NavigationProperty Name="Petsitter" Relationship="PetsitterFinderModel.FK_Applications_Petsitter" FromRole="Request" ToRole="Petsitter" />
+          <NavigationProperty Name="User" Relationship="PetsitterFinderModel.FK_Request_User" FromRole="Request" ToRole="User" />
+          <NavigationProperty Name="RequestPets" Relationship="PetsitterFinderModel.FK_RequestPet_Request" FromRole="Request" ToRole="RequestPet" />
+        </EntityType>
+        <Association Name="FK_OverexposuredDates_Request">
+          <End Type="PetsitterFinderModel.Request" Role="Request" Multiplicity="0..1" />
+          <End Type="PetsitterFinderModel.OverexposuredDate" Role="OverexposuredDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OverexposuredDate">
+              <PropertyRef Name="RequestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -682,11 +730,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OverexposuredDates">
+            <EntityTypeMapping TypeName="PetsitterFinderModel.OverexposuredDate">
+              <MappingFragment StoreEntitySet="OverexposuredDates">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Requests">
             <EntityTypeMapping TypeName="PetsitterFinderModel.Request">
               <MappingFragment StoreEntitySet="Request">
-                <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PetssiterId" ColumnName="PetssiterId" />

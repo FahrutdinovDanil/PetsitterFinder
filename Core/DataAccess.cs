@@ -53,6 +53,11 @@ namespace Core
             ObservableCollection<Petsitter> petsitters = new ObservableCollection<Petsitter>(Connection.connection.Petsitters);
             return petsitters;
         }
+        public static ObservableCollection<OverexposuredDate> GetOverexposuredDates()
+        {
+            ObservableCollection<OverexposuredDate> overexposuredDates = new ObservableCollection<OverexposuredDate>(Connection.connection.OverexposuredDates);
+            return overexposuredDates;
+        }
 
         public static List<Pet> GetPets(int Id)
         {
@@ -152,6 +157,20 @@ namespace Core
             try
             {
                 Connection.connection.RequestPets.Add(requestPet);
+                Connection.connection.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool AddOverexposuredDate(OverexposuredDate overexposuredDate)
+        {
+            try
+            {
+                Connection.connection.OverexposuredDates.Add(overexposuredDate);
                 Connection.connection.SaveChanges();
                 return true;
             }

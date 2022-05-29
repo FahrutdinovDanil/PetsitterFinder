@@ -20,8 +20,10 @@
         <AssociationConnector Association="PetsitterFinderModel.FK_Petsitter_User" />
         <AssociationConnector Association="PetsitterFinderModel.FK_User_Role" />
         <EntityTypeShape EntityType="PetsitterFinderModel.Client" Width="1.5" PointX="5.625" PointY="14.25" />
-        <EntityTypeShape EntityType="PetsitterFinderModel.Request" Width="1.5" PointX="7.875" PointY="18" />
         <AssociationConnector Association="PetsitterFinderModel.FK_Client_User" />
+        <EntityTypeShape EntityType="PetsitterFinderModel.OverexposuredDate" Width="1.5" PointX="10.125" PointY="20.625" />
+        <EntityTypeShape EntityType="PetsitterFinderModel.Request" Width="1.5" PointX="7.875" PointY="17.125" />
+        <AssociationConnector Association="PetsitterFinderModel.FK_OverexposuredDates_Request" />
         <AssociationConnector Association="PetsitterFinderModel.FK_Applications_Petsitter" />
         <AssociationConnector Association="PetsitterFinderModel.FK_Request_User" />
         <AssociationConnector Association="PetsitterFinderModel.FK_RequestPet_Request" />

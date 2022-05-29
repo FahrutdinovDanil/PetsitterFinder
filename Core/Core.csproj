@@ -93,6 +93,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FinderDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DB\OverexposuredDate.cs">
+      <DependentUpon>FinderDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\Owner.cs">
       <DependentUpon>FinderDB.tt</DependentUpon>
     </Compile>

@@ -17,6 +17,7 @@ namespace Core.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Request()
         {
+            this.OverexposuredDates = new HashSet<OverexposuredDate>();
             this.RequestPets = new HashSet<RequestPet>();
         }
     
@@ -25,9 +26,9 @@ namespace Core.DB
         public Nullable<int> PetssiterId { get; set; }
         public string Status { get; set; }
         public Nullable<bool> State { get; set; }
-        public Nullable<System.DateTime> DateStart { get; set; }
-        public Nullable<System.DateTime> DateFinish { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OverexposuredDate> OverexposuredDates { get; set; }
         public virtual Petsitter Petsitter { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

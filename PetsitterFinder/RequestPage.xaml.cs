@@ -1,5 +1,7 @@
-﻿using Core;
+﻿using com.sun.org.apache.xpath.@internal.operations;
+using Core;
 using Core.DB;
+using CsQuery.Engine.PseudoClassSelectors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +27,9 @@ namespace PetsitterFinder
         private static User currentUser;
         private static Petsitter selectedPetsitter;
         private static List<Pet> pets { get; set; }
+        private static List<OverexposuredDate> overexposuredDates { get; set; }
         private Request Request { get; set; }
+        private OverexposuredDate OverexposuredDate { get; set; }
         public RequestPage(Petsitter petsitter, User user)
         {
             InitializeComponent();
@@ -35,26 +39,38 @@ namespace PetsitterFinder
             cbPet.ItemsSource = pets;
             cbPet.DisplayMemberPath = "Name";
             Request = new Request();
+            OverexposuredDate = new OverexposuredDate();
+            overexposuredDates = DataAccess.GetOverexposuredDates().ToList();
+            foreach (var date in overexposuredDates)
+            {
+                    cldDate.BlackoutDates.Add(new CalendarDateRange(Convert.ToDateTime(date.Date)));
+            }
 
         }
         private void btn_SendRequest_Click(object sender, RoutedEventArgs e)
-        { 
-            Request.DateStart = dpDate.SelectedDate;
+        {
+            var dates = cldDate.SelectedDates;
+            if (dates != null)
+            {
+                if (Request.OverexposuredDates.Where(r => r.RequestId == Request.Id).Count() == 0)
+                {
+                    foreach (var date in dates)
+                    {
+                        Request.OverexposuredDates.Add(new OverexposuredDate { Request = Request, Date = date.Date});
+                    }
+                }
+            }
             Request.State = false;
             Request.Status = "В ожидании";
             Request.PetssiterId = selectedPetsitter.Id;
             Request.UserId = currentUser.Id;
             DataAccess.AddRequest(Request);
-            //DataAccess.AddRequest(Request);
-            //DataAccess.AddRequestPet(requestPetToAdd);
-
-            //DataAccess.AddPetsitter(petsitterToAdd);
         }
 
         private void cbPet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var pet = cbPet.SelectedItem as Pet;
-            if (Request.RequestPets.Where(x=> x.Pet.Id == pet.Id).Count() == 0)
+            if (Request.RequestPets.Where(x => x.Pet.Id == pet.Id).Count() == 0)
                 Request.RequestPets.Add(new RequestPet { Pet = pet });
             lvPets.ItemsSource = Request.RequestPets;
             lvPets.Items.Refresh();
@@ -71,5 +87,24 @@ namespace PetsitterFinder
                 lvPets.Items.Refresh();
             }
         }
+
+        private void cldDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //var dates = cldDate.SelectedDates;
+            //if (dates != null)
+            //{
+            //    if (Request.OverexposuredDates.Where(r => r.RequestId == Request.Id).Count() == 0)
+            //    {
+            //        foreach (var date in dates)
+            //        {
+            //            OverexposuredDate.Date = date.Date;
+            //            Request.OverexposuredDates.Add(new OverexposuredDate { Request = Request });
+            //            DataAccess.AddOverexposuredDate(OverexposuredDate);
+            //        }
+            //    }
+            //}
+        }
     }
 }
+
+

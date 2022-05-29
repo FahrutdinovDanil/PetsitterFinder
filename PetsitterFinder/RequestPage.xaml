@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:PetsitterFinder"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -24,10 +25,17 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <DatePicker Grid.Column="1" 
-                    Grid.Row="2" 
-                    x:Name="dpDate"
-                    />
+        <Calendar Grid.Column="0" 
+                  Grid.ColumnSpan="2"
+                  Grid.RowSpan="2"
+                  Grid.Row="1" 
+                  x:Name="cldDate"
+                  SelectedDatesChanged="cldDate_SelectedDatesChanged" SelectionMode="MultipleRange">
+            <Calendar.BlackoutDates>
+            </Calendar.BlackoutDates>
+        </Calendar>
+        <Label Grid.Row="3" Grid.Column="1">Selected dates:</Label>
+        <ListView x:Name="lvDates" ItemsSource="{Binding ElementName=cldDate, Path=SelectedDates}"  Grid.Row="4" Grid.Column="1" MinHeight="150" />
 
         <ListView x:Name="lvPets"
                    ItemsSource="{Binding Request.RequestPet}"

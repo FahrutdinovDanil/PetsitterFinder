@@ -34,6 +34,7 @@ namespace Core.DB
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<OverexposuredDate> OverexposuredDates { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
     }
 }
