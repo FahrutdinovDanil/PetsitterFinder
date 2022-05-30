@@ -9,7 +9,23 @@
       Title="BasicPage">
 
     <Grid>
-        <Grid VerticalAlignment="Top" Background="#F1E4CA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Top" Background="#F1E4CA" Grid.Column="0" Grid.ColumnSpan="4" Height="55">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -19,12 +35,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="logo.png" VerticalAlignment="Center" Width="50" Height="50"/>
-            <Label Grid.Column="1" Content="Главная" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Main_Click"/>
-            <Label Grid.Column="2" Content="Ситтеры" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Sitters_Click"/>
-            <Label Grid.Column="3" Content="Питомцы" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyPets_Click"/>
+            <Label Grid.Column="1" Content="Ситтеры" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Sitters_Click"/>
+            <Label Grid.Column="2" Grid.ColumnSpan="2" Content="Мои питомцы" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyPets_Click"/>
             <Label Grid.Column="4" Content="Заявки" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyRequests_Click"/>
             <Button Grid.Column="5" Grid.ColumnSpan="2" Content="Мой кабинет"  VerticalAlignment="Center" Height="32" Width="150" FontSize="18" Background="#005589" Foreground="#F1E4CA" Click="btn_MyCabinet_Click"/>
         </Grid>
+        <Image Source="main.png" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="6" VerticalAlignment="Top" Grid.Row="1"></Image>
     </Grid>
 </Page>

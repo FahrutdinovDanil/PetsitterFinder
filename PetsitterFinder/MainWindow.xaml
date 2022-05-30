@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="#ABD8EE">
     <Grid>
-        <Grid Height="30" VerticalAlignment="Top" Margin="0 50 0 0">
+        <!--<Grid Height="30" VerticalAlignment="Top" Margin="0 50 0 0">
             <Image Source="back.png" Width="30" HorizontalAlignment="Left" Height="30" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
-        </Grid>
+        </Grid>-->
         <Frame x:Name="frame_auto_reg" NavigationUIVisibility="Hidden" Margin="0 0 0 0"/>
     </Grid>
 </Window>

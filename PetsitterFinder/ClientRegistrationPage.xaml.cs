@@ -47,7 +47,7 @@ namespace PetsitterFinder
         private void btn_SaveClient_Click(object sender, RoutedEventArgs e)
         {
             User userToAdd = new User();
-            userToAdd.Password = tbPassword.Text.Trim();
+            userToAdd.Password = pbPassword.Password.Trim();
             userToAdd.Login = tbLogin.Text.Trim();
             userToAdd.RoleId = 3;
 

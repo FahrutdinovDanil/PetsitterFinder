@@ -27,9 +27,9 @@ namespace PetsitterFinder
             frame_auto_reg.Navigate(new AuthorizationPage());
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            frame_auto_reg.GoBack();
-        }
+        //private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    frame_auto_reg.GoBack();
+        //}
     }
 }

@@ -22,47 +22,79 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Как вы хотите зарегистрироваться?" 
-                   FontSize="18"
+        <Border Background="AntiqueWhite" BorderBrush="Black" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="3" BorderThickness="1,1,1,1" CornerRadius="30,30,30,30" Width="600">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Как вы хотите зарегистрироваться?" 
+                   FontSize="24"
                    Grid.Column="1" Grid.Row="1" 
-                   Grid.ColumnSpan="2" 
+                   Grid.ColumnSpan="4" 
                    VerticalAlignment="Center" 
                    HorizontalAlignment="Center"/>
 
-        <Button x:Name="btnRegistrationClient" 
+                <Button x:Name="btnRegistrationClient" 
                 Content="Регистрация клиента" 
                 FontSize="18" Grid.Column="1" 
-                Grid.Row="2" Grid.ColumnSpan="2"
+                Grid.Row="2" Grid.ColumnSpan="4"
                 HorizontalAlignment="Center" 
-                Height="40" Width="180" 
+                Height="40" Width="250" 
                 BorderBrush="#F1E4CA" 
                 Margin="0 0 0 0" 
                 Background="#005589" 
                 Foreground="#F1E4CA"
                 Click="btn_RegClient_Click">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="18"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        
-        <Button x:Name="btnRegistrationSitter" 
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="18"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Separator Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Width="250" Background="Black" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1.2" />
+                    </Separator.RenderTransform>
+                </Separator>
+                <TextBlock Text="или" FontSize="24" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Separator Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="3" Width="250" Background="Black" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1.2" />
+                    </Separator.RenderTransform>
+                </Separator>
+
+                <Button x:Name="btnRegistrationSitter" 
                 Content="Регистрация ситтера"
                 FontSize="18" Grid.Column="1"
-                Grid.Row="3" Grid.ColumnSpan="2"
+                Grid.Row="4" Grid.ColumnSpan="4"
                 HorizontalAlignment="Center" 
-                Height="40" Width="180" 
+                Height="40" Width="250" 
                 BorderBrush="#F1E4CA" 
                 Margin="0 0 0 0" 
                 Background="#005589" 
                 Foreground="#F1E4CA" 
                 Click="btn_RegSitter_Click">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="18"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="18"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
