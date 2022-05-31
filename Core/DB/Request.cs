@@ -24,9 +24,11 @@ namespace Core.DB
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> PetssiterId { get; set; }
-        public string Status { get; set; }
-        public Nullable<bool> State { get; set; }
         public Nullable<decimal> Sum { get; set; }
+        public Nullable<bool> StateForPesitter { get; set; }
+        public Nullable<bool> SateForClient { get; set; }
+        public string StatusForClient { get; set; }
+        public string StatusForSitter { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OverexposuredDate> OverexposuredDates { get; set; }

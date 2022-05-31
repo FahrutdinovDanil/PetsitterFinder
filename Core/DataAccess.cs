@@ -68,18 +68,13 @@ namespace Core
 
         public static ObservableCollection<Request> GetRequests()
         {
-            ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Requests.Where(p => p.State == false));
+            ObservableCollection<Request> requests = new ObservableCollection<Request>(Connection.connection.Requests);
             return requests;
         }
-
-        public static ObservableCollection<Request> GetRequestsForClient(int Id)
-        {
-            return new ObservableCollection<Request>(GetRequests().Where(r => r.UserId == Id));
-        }
-
+        
         public static ObservableCollection<Request> GetRequestsForPetsitter(int Id)
         {
-            return new ObservableCollection<Request>(GetRequests().Where(r => r.PetssiterId == Id));
+            return new ObservableCollection<Request>(GetRequests().Where(r => r.PetssiterId == Id && r.StateForPesitter== false));
         }
 
         public static void SavePet(Pet pet)
@@ -210,6 +205,15 @@ namespace Core
         {
             return GetClients().FirstOrDefault(c => c.UserId == user.Id);
         }
+        public static Request GetRequests(User user)
+        {
+            return GetRequests().FirstOrDefault(c => c.UserId == user.Id && (c.SateForClient == false || c.SateForClient == null));
+        }
+
+        public static ObservableCollection<Request> GetRequestsForClient(int Id)
+        {
+            return new ObservableCollection<Request>(GetRequests().Where(r => r.UserId == Id && r.SateForClient == false));
+        }
 
         public static Petsitter GetPetsitter(User user)
         {
@@ -229,9 +233,22 @@ namespace Core
             }
         }
 
-        public static bool DeleteRequest(Request request)
+        public static bool DeleteRequestClient(Request request)
         {
-            request.State = true;
+            request.SateForClient = true;
+            try
+            {
+                Connection.connection.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool DeleteRequestPetsitter(Request request)
+        {
+            request.StateForPesitter = true;
             try
             {
                 Connection.connection.SaveChanges();

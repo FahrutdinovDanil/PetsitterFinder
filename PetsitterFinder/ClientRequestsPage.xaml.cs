@@ -30,5 +30,21 @@ namespace PetsitterFinder
             currentUser = user;
             lvRequests.ItemsSource = DataAccess.GetRequestsForClient(DataAccess.GetClient(currentUser).Id);
         }
+        private void btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            //overexposuredDates = DataAccess.GetOverexposuredDates().ToList();
+            var request = lvRequests.SelectedItem as Request;
+            //foreach (var reques in overexposuredDates.ToList())
+            //{
+            //    if (request.Id == reques.RequestId)
+            //    {
+            //        DataAccess.RemoveOverexposuredDate(reques.Id);
+            //    }
+            //}
+            request.StatusForClient = "Удален";
+            DataAccess.DeleteRequestClient(request);
+            NavigationService.Navigate(new PetsitterRequestsPage(currentUser));
+            lvRequests.Items.Refresh();
+        }
     }
 }

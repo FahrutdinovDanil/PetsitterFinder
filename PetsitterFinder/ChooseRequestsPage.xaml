@@ -9,6 +9,43 @@
       Title="ChooseRequestsPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="lvRequests" ItemsSource="{Binding requests}"
+                  Grid.Column="1"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="4"
+                  Grid.RowSpan="3">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" 
+                                        DisplayMemberBinding="{Binding Id}"
+                                        Width="25"/>
+                    <GridViewColumn Header="Наименование" 
+                                        Width="80"
+                                        DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Дата" 
+                                        Width="80"
+                                        DisplayMemberBinding="{Binding Date}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Удалить" Click="btn_Delete_Click"/>
+        <Button Content="Отправленные заявки" Grid.Column="1" Click="btn_SentRequests_Click"/>
     </Grid>
 </Page>

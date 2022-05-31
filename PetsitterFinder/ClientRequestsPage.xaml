@@ -45,5 +45,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="Удалить" Click="btn_Delete_Click"/>
     </Grid>
 </Page>

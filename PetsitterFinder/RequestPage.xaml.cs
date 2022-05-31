@@ -64,8 +64,10 @@ namespace PetsitterFinder
             }
 
             Request.Sum = lvDates.Items.Count * selectedPetsitter.PricePerDay;
-            Request.State = false;
-            Request.Status = "В ожидании";
+            Request.SateForClient = false;
+            Request.StateForPesitter = false;
+            Request.StatusForClient = "В ожидании";
+            Request.StatusForSitter = "В ожидании";
             Request.PetssiterId = selectedPetsitter.Id;
             Request.UserId = currentUser.Id;
             DataAccess.AddRequest(Request);

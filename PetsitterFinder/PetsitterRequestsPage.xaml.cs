@@ -35,7 +35,8 @@ namespace PetsitterFinder
         private void btn_Accept_Click(object sender, RoutedEventArgs e)
         {
             var request = lvRequests.SelectedItem as Request;
-            request.Status = "Принято";
+            request.StatusForSitter = "Принято";
+            request.StatusForClient = "Принято";
             DataAccess.EditRequest(request);
             lvRequests.Items.Refresh();
         }
@@ -52,7 +53,8 @@ namespace PetsitterFinder
                     DataAccess.RemoveOverexposuredDate(reques.Id);
                 }
             }
-            request.Status = "Отказано";
+            request.StatusForClient = "Отказано";
+            request.StatusForSitter = "Отказано";
             DataAccess.EditRequest(request);
             lvRequests.Items.Refresh();
         }
@@ -68,8 +70,8 @@ namespace PetsitterFinder
                     DataAccess.RemoveOverexposuredDate(reques.Id);
                 }
             }
-            request.Status = "Удален";
-            DataAccess.DeleteRequest(request);
+            request.StatusForSitter = "Удален";
+            DataAccess.DeleteRequestPetsitter(request);
             NavigationService.Navigate(new PetsitterRequestsPage(currentUser));
         }
     }
