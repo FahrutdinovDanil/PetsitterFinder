@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:PetsitterFinder"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="#ABD8EE"/>
+            <Setter Property="Foreground" Value="AntiqueWhite"/>
+        </Style>
     </Application.Resources>
 </Application>

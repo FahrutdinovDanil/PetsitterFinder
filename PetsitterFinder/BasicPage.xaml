@@ -7,7 +7,30 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BasicPage">
-
+    <Page.Resources>
+        <Style x:Key="MyLabel">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                                <ColorAnimation To="BurlyWood" Duration="0:0:0:0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                                <ColorAnimation To="#005589" Duration="0:0:0:0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -25,7 +48,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid VerticalAlignment="Top" Background="#F1E4CA" Grid.Column="0" Grid.ColumnSpan="4" Height="55">
+        <Grid VerticalAlignment="Top" Background="#F1E4CA" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="4" Height="80">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -35,11 +58,18 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="1" Content="Ситтеры" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Sitters_Click"/>
-            <Label Grid.Column="2" Grid.ColumnSpan="2" Content="Мои питомцы" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyPets_Click"/>
-            <Label Grid.Column="4" Content="Заявки" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyRequests_Click"/>
-            <Button Grid.Column="5" Grid.ColumnSpan="2" Content="Мой кабинет"  VerticalAlignment="Center" Height="32" Width="150" FontSize="18" Background="#005589" Foreground="#F1E4CA" Click="btn_MyCabinet_Click"/>
+            <Image Source="images/logo.png"/>
+            <Label x:Name="lb_Sitters" Style="{StaticResource MyLabel}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Content="Ситтеры" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_Sitters_Click"/>
+            <Label Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource MyLabel}" Grid.ColumnSpan="2" Content="Мои питомцы" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyPets_Click"/>
+            <Label Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource MyLabel}" Content="Заявки" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="#005589" MouseLeftButtonDown="lb_MyRequests_Click"/>
+            <Button Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Content="Мой кабинет"  VerticalAlignment="Center" Height="40" Width="180" FontSize="24" Background="#005589" Foreground="#F1E4CA" Click="btn_MyCabinet_Click"/>
         </Grid>
-        <Image Source="main.png" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="6" VerticalAlignment="Top" Grid.Row="1"></Image>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="0,80,0,0">
+            <Grid>
+                <Image Source="images/main.png" Opacity="0.6"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="3" FontSize="30" FontStyle="Italic" FontFamily="Bold" Margin="10 20 0 0" Text="Подберите человека, пока вы в отъезде!"></TextBlock>
+            </Grid>
+        </StackPanel>
+        
     </Grid>
 </Page>

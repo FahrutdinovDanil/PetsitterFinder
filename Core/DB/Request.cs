@@ -26,6 +26,7 @@ namespace Core.DB
         public Nullable<int> PetssiterId { get; set; }
         public string Status { get; set; }
         public Nullable<bool> State { get; set; }
+        public Nullable<decimal> Sum { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OverexposuredDate> OverexposuredDates { get; set; }

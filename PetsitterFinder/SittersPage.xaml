@@ -7,7 +7,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SittersPage">
-
+    <Page.Resources>
+        <Style TargetType="ListViewItem">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red"/>
+            </Style.Resources>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -24,25 +30,55 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <TextBlock Text="Найти:" FontSize="18"  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Column="2"/>
-        <TextBox x:Name="tb_search" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Height="30" VerticalContentAlignment="Center" FontSize="18" VerticalAlignment="Center" TextChanged="tb_search_TextChanged"/>
+        <Border Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Где искать :" FontSize="18"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox x:Name="tb_City_Search" Grid.Row="0" Grid.Column="1" Height="30" VerticalContentAlignment="Center" FontSize="18" VerticalAlignment="Center" TextChanged="tb_City_Search_TextChanged"/>
+                <TextBlock Text="Искать по имени:" FontSize="18"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox x:Name="tb_Name_Search" Grid.Row="1" Grid.Column="1" Height="30" VerticalContentAlignment="Center" FontSize="18" VerticalAlignment="Center" TextChanged="tb_Name_Search_TextChanged"/>
+            </Grid>
+        </Border>
 
         <ListView x:Name="lvPetsitters" ItemsSource="{Binding sitters}"
                   Grid.Column="1"
-                  Grid.Row="1"
+                  Grid.Row="4"
                   Grid.ColumnSpan="4"
                   Grid.RowSpan="3"
-                  SelectionChanged="lvPetsitters_SelectionChanged">
+                  SelectionChanged="lvPetsitters_SelectionChanged" Background="#FFABD8EE">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="№" 
-                                        DisplayMemberBinding="{Binding Id}"
-                                        Width="25"/>
-                    <GridViewColumn Header="Наименование" 
+                    <GridViewColumn Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Photo}" Height="70" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" 
                                         Width="80"
                                         DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header=""
+                                        Width="80"
+                                        DisplayMemberBinding="{Binding Surname}"/>
+                    <GridViewColumn Header="" 
+                                        Width="80"
+                                        DisplayMemberBinding="{Binding Address}"/>
+                    <GridViewColumn Header="" 
+                                        Width="80"
+                                        DisplayMemberBinding="{Binding PricePerDay}"/>
                 </GridView>
             </ListView.View>
         </ListView>

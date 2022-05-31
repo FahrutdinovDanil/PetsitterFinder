@@ -74,6 +74,7 @@
                   FontSize="15"
                   VerticalAlignment="Bottom"
                   Height="30"/>
+        <TextBlock x:Name="tbSum" Text="{Binding UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Content="Отправить"
                 Grid.Column="3"

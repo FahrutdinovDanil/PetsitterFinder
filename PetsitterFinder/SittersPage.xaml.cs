@@ -52,14 +52,24 @@ namespace PetsitterFinder
         {
             var filterPetsitters = sitters;
 
-            if (tb_search.Text != "")
+            if (tb_City_Search.Text != "")
             {
-                filterPetsitters = sitters.Where(z => (z.Name.Contains(tb_search.Text))).ToList();
+                filterPetsitters = sitters.Where(z => (z.Address.Contains(tb_City_Search.Text))).ToList();
+            }
+            else if (tb_Name_Search.Text != "")
+            {
+                filterPetsitters = sitters.Where(z => (z.Name.Contains(tb_Name_Search.Text)) || (z.Surname.Contains(tb_Name_Search.Text))).ToList();
             }
             lvPetsitters.ItemsSource = filterPetsitters;
         }
 
-        private void tb_search_TextChanged(object sender, RoutedEventArgs e)
+        private void tb_City_Search_TextChanged(object sender, RoutedEventArgs e)
+        {
+            actualPage = 0;
+            Filter();
+        }
+
+        private void tb_Name_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
             actualPage = 0;
             Filter();

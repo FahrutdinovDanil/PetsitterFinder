@@ -171,6 +171,9 @@
       <DependentUpon>AddPetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CalenderHelper.cs" />
+    <Compile Include="ChooseRequestsPage.xaml.cs">
+      <DependentUpon>ChooseRequestsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClientRequestsPage.xaml.cs">
       <DependentUpon>ClientRequestsPage.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BasicPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChooseRequestsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,16 +313,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="logo.png" />
+    <Resource Include="images\next.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="next.png" />
+    <Resource Include="images\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="back.png" />
+    <Resource Include="images\main.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="main.png" />
+    <Resource Include="images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

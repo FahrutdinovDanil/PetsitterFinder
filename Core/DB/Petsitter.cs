@@ -29,6 +29,8 @@ namespace Core.DB
         public Nullable<bool> Confirmed { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
+        public Nullable<decimal> PricePerDay { get; set; }
+        public string AboutMyself { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

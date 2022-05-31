@@ -4,6 +4,7 @@ using Core.DB;
 using CsQuery.Engine.PseudoClassSelectors;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace PetsitterFinder
             selectedPetsitter = petsitter;
             pets = DataAccess.GetPets(user.Id);
             cbPet.ItemsSource = pets;
+
             cbPet.DisplayMemberPath = "Name";
             Request = new Request();
             OverexposuredDate = new OverexposuredDate();
@@ -60,6 +62,8 @@ namespace PetsitterFinder
                     }
                 }
             }
+
+            Request.Sum = lvDates.Items.Count * selectedPetsitter.PricePerDay;
             Request.State = false;
             Request.Status = "В ожидании";
             Request.PetssiterId = selectedPetsitter.Id;
@@ -90,19 +94,7 @@ namespace PetsitterFinder
 
         private void cldDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var dates = cldDate.SelectedDates;
-            //if (dates != null)
-            //{
-            //    if (Request.OverexposuredDates.Where(r => r.RequestId == Request.Id).Count() == 0)
-            //    {
-            //        foreach (var date in dates)
-            //        {
-            //            OverexposuredDate.Date = date.Date;
-            //            Request.OverexposuredDates.Add(new OverexposuredDate { Request = Request });
-            //            DataAccess.AddOverexposuredDate(OverexposuredDate);
-            //        }
-            //    }
-            //}
+            tbSum.Text = (lvDates.Items.Count * selectedPetsitter.PricePerDay).ToString();
         }
     }
 }

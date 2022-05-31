@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace PetsitterFinder
 {
@@ -23,6 +24,7 @@ namespace PetsitterFinder
     public partial class BasicPage : Page
     {
         public static User currentUser;
+        Label clickedLabel;
         public BasicPage(User user)
         {
             currentUser = user;
@@ -54,8 +56,6 @@ namespace PetsitterFinder
                 NavigationService.Navigate(new ClientRequestsPage(currentUser));
             else
                 NavigationService.Navigate(new PetsitterRequestsPage(currentUser));
-
-
         }
     }
 }

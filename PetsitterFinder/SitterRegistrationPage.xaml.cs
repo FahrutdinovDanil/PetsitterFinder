@@ -41,7 +41,7 @@ namespace PetsitterFinder
             if (openFile.ShowDialog().GetValueOrDefault())
             {
                 user_photo = File.ReadAllBytes(openFile.FileName);
-                imgClient.Source = new BitmapImage(new Uri(openFile.FileName));
+                imgSitter.Source = new BitmapImage(new Uri(openFile.FileName));
             }
         }
         private void btn_SaveSitter_Click(object sender, RoutedEventArgs e)

@@ -247,6 +247,7 @@
                      Height="35"
                      Width="200"
                      VerticalAlignment="Bottom"
+                     Padding="7"
                      HorizontalAlignment="Left"/>
 
                 <TextBox x:Name="tbCity"
@@ -269,7 +270,7 @@
                 </TextBox>
 
 
-                <Image x:Name="imgClient" 
+                <Image x:Name="imgSitter" 
                    Grid.Column="7" 
                    Grid.Row="1" 
                    Grid.RowSpan="7" 

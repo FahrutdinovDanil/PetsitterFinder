@@ -1,7 +1,9 @@
 ﻿using Core;
 using Core.DB;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +31,10 @@ namespace PetsitterFinder
             InitializeComponent();
             currentUser = user;
             selectedPetsitter = petsitter;
-            tbName.Text = petsitter.Name;
+            tbNameSurname.Text = $"{selectedPetsitter.Name} {selectedPetsitter.Surname}";
+            tbAddress.Text = selectedPetsitter.Address;
+            tbPrice.Text = selectedPetsitter.PricePerDay.ToString();
+            this.DataContext = selectedPetsitter;
         }
 
         private void btn_Send_Click(object sender, RoutedEventArgs e)
